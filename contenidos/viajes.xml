@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	
+	<viaje>		
+		<id>1</id> 		
+		<orden>1</orden>
+		<tipo>Nuestras Ofertas</tipo> 
+		<localizacion>Huesca</localizacion>		
+		<titulo>Excursión de esquí en Pirineos</titulo>
+		<descripcion><![CDATA[ 
+			<p>En Huesca, 4 días de forfait, alojamiento y desayuno</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam adipiscing aliquam feugiat. Curabitur tortor risus, interdum eu blandit sed, consequat in diam. Maecenas a nisi est, in volutpat eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam quis congue neque. Mauris rhoncus iaculis enim. In id neque vitae velit consequat vehicula id non erat. Donec quam nisi, dictum ac aliquet ac, volutpat vel erat. Aliquam risus sapien, mattis a eleifend sed, consectetur at est. In eget luctus lectus. Mauris imperdiet fermentum metus, ac viverra eros ultrices ut. Phasellus et dui orci. Phasellus id porttitor odio. Sed vel tortor sit amet nulla consectetur ultricies sit amet vulputate nunc. Cras et massa a elit porta suscipit. Fusce a euismod augue. s</p> ]]> </descripcion>
+		<imagen> 
+			<url>http://viajes-online.net/redimensionar-imagen.php?imagen=http://www.grupotiempoactivo.com/ofertas-viajes-online/valdezcaray.jpg&amp;dimensiones=170</url>
+			<alt>alt para la imagen01</alt>
+			<title>Imagen 01</title>
+		</imagen>		
+		<precio>por solo 1500 Euros</precio>
+		<adjunto>http://www.grupotiempoactivo.com/ofertas-viajes-online/Excursion_de_un_da_Valdezcaray.doc</adjunto>	
+	</viaje>
+
+
+	<viaje>				
+		<id>2</id> 		
+		<orden>2</orden>
+		<tipo>Nuestras Ofertas</tipo> 
+		<localizacion>Cracovia</localizacion>
+		<titulo>Semana Santa en Cracovia</titulo>		
+		<descripcion><![CDATA[ <p>Disfruta de unos días en Cracovia esta Semana Santa. Del 28 al 31 de Marzo.</p> 
+		<p>El Precio Final Incluye: Vuelo especial directo Valladolid/Cracovia/Valladolid;
+Estancia de 3 noches en el hotel elegido o similar; Régimen alojamiento y desayuno; Traslados aeropuerto/hotel/ aeropuerto con asistencia en castellano;Seguro de viaje.</p>
+		<p>Consultar tasas y carburante, no incluidos en el precio.</p>
+		]]> </descripcion>
+		<imagen> 
+			<url>http://viajes-online.net/redimensionar-imagen.php?imagen=http://www.grupotiempoactivo.com/ofertas-viajes-online/descarga1.jpg&amp;imensiones=170</url>
+			<alt>Semana Santa en Cracovia</alt>
+			<title>Semana Santa en Cracovia</title>
+		</imagen>
+		<imagen> 
+			<url>http://viajes-online.net/redimensionar-imagen.php?imagen=http://www.grupotiempoactivo.com/ofertas-viajes-online/tai_2.jpg&amp;dimensiones=170</url>
+			<alt>Semana Santa en Cracovia</alt>
+			<title>Semana Santa en Cracovia</title>
+		</imagen>
+		<imagen> 
+			<url>http://viajes-online.net/redimensionar-imagen.php?imagen=http://www.grupotiempoactivo.com/ofertas-viajes-online/tai_3.jpg&amp;dimensiones=170</url>
+			<alt>Semana Santa en Cracovia</alt>
+			<title>Semana Santa en Cracovia</title>
+		</imagen>
+		<precio>Desde 550 Euros</precio>
+		<adjunto>http://www.grupotiempoactivo.com/ofertas-viajes-online/thai.pdf</adjunto>
+		
+	</viaje>
+
+
+
+
+
+
+
+
+	<viaje>				
+		<id>3</id> 		
+		<orden>1</orden>
+		<tipo>Despedidas de Soltero</tipo> 
+		<localizacion>Burgos</localizacion>
+		<titulo>BURGOS DELUXE CON SPA Y LIMUSINA</titulo>		
+		<descripcion><![CDATA[ <p> ¿Te apetece sentirte con una celebritie? Ahora es posible. Te damos la oportunidad de darte un relajado baño y después una vuelta en estos vehiculos tan especiales. </p> 
+<p> No lo dejes pasar ni un minuto más. La despedida de soltera de tu amiga es una excusa perfecta. </p>
+		]]> </descripcion>
+		<imagen> 
+			<url>http://www.agenciadedespedidas.com/redimensionar-imagen.php?imagen=http://www.grupotiempoactivo.com/actividades/balnerio.jpg&amp;dimensiones=120</url>
+			<alt>Despedida en Burgos</alt>
+			<title>Despedida en Burgos</title>
+		</imagen>	
+		<actividad>
+			<nombre>SPA URBANO BURGOS</nombre>
+			<descripcion><![CDATA[ <p> Durante una hora recorreras, aconsejado por los especialistas de este spa urbano, un circuito termal completo que te ayudará a relajarte, a limpiar y a tonificar tu organismo. </p> ]]> </descripcion>
+			<imagen>
+				<url>http://www.agenciadedespedidas.com/redimensionar-imagen.php?imagen=http://www.grupotiempoactivo.com/actividades/balnerio.jpg&amp;dimensiones=80</url>
+				<alt>Texto para el atributo alt</alt>
+				<title>Título de la imagen</title>
+			</imagen>
+			<imagen>
+				<url>http://www.agenciadedespedidas.com/redimensionar-imagen.php?imagen=http://www.grupotiempoactivo.com/actividades/CV___V1_BALNEARIO_BIENESTAR___BURGOS_6_3.jpg&amp;dimensiones=80</url>
+				<alt>Texto para el atributo alt</alt>
+				<title>Título de la imagen</title>
+			</imagen>
+			<imagen>
+				<url>Durante una hora recorreras, aconsejado por los especialistas de este spa urbano, un circuito termal completo que te ayudará a relajarte, a limpiar y a tonificar tu organismo.</url>
+				<alt>Texto para el atributo alt</alt>
+				<title>Título de la imagen</title>
+			</imagen>
+		</actividad>		
+		<actividad> 		
+			<nombre>LIMUSINA EN BURGOS</nombre>
+			<descripcion><![CDATA[ <p>Un paseo en Limusina es una experiencia irrepetible, te sentirás como una estrella recorriendo las calles de tu ciudad, mientras te sirves una copa de champán y escuchas la mejor música. ¿ Te lo imaginas ? llegar a la discoteca con tus amigos y bajar en plan estrella de cine, eso hay que probarlo para sentirlo. Mientras vas de sitio en sitio podrás disfrutar de una copa y la mejor música.</p> ]]> </descripcion>
+			<imagen>
+				<url>http://www.agenciadedespedidas.com/redimensionar-imagen.php?imagen=http://www.grupotiempoactivo.com/actividades/limusina1.jpg&amp;dimensiones=80</url>
+				<alt>Texto para el atributo alt</alt>
+				<title>Título de la imagen</title>
+			</imagen>			
+			<imagen>
+				<url>http://www.agenciadedespedidas.com/redimensionar-imagen.php?imagen=http://www.grupotiempoactivo.com/actividades/limusina2.jpg&amp;dimensiones=80</url>
+				<alt>Texto para el atributo alt</alt>
+				<title>Título de la imagen</title>
+			</imagen>			
+		</actividad>
+		<precio>51 Euros por persona</precio>
+		<nota>Grupo mínimo 8 personas (para el servicio de llimusina).</nota>
+		
+	</viaje>
+
+
+
+
+
+
+
+
+
+
+
+	<viaje>				
+		<id>4</id> 		
+		<orden>2</orden>
+		<tipo>viajes de novios</tipo> 
+		<localizacion>[a-z|A-Z|0-9]</localizacion>
+		<titulo>[a-z|A-Z|0-9]</titulo>		
+		<descripcion><![CDATA[ <p> Contenido html </p> ]]> </descripcion>
+		<imagen> 
+			<url>URL de la imagen </url>
+			<alt>Texto para el atributo alt</alt>
+			<title>Título de la imagen</title>
+		</imagen>
+		<imagen> 
+			<url>URL de la imagen </url>
+			<alt>Texto para el atributo alt</alt>
+			<title>Título de la imagen</title>
+		</imagen>		
+		<actividad>
+			<nombre>[a-z|A-Z|0-9]</nombre>
+			<descripcion><![CDATA[ <p> Contenido html </p> ]]> </descripcion>
+			<imagen>
+				<url>URL de la imagen </url>
+				<alt>Texto para el atributo alt</alt>
+				<title>Título de la imagen</title>
+			</imagen>
+			<imagen>
+				<url>URL de la imagen </url>
+				<alt>Texto para el atributo alt</alt>
+				<title>Título de la imagen</title>
+			</imagen>
+		</actividad>		
+		<actividad> 		
+			<nombre>[a-z|A-Z|0-9]</nombre>
+			<descripcion><![CDATA[ <p> Contenido html </p> ]]> </descripcion>
+			<imagen>
+				<url>URL de la imagen </url>
+				<alt>Texto para el atributo alt</alt>
+				<title>Título de la imagen</title>
+			</imagen>			
+			<imagen>
+				<url>URL de la imagen </url>
+				<alt>Texto para el atributo alt</alt>
+				<title>Título de la imagen</title>
+			</imagen>			
+		</actividad>
+		<precio>500 Euros por persona</precio>
+		<nota>
+		
+		</nota>
+		<adjunto>url del fichero</adjunto>
+		<adjunto>url del fichero</adjunto>
+		
+	</viaje>
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+</root>
