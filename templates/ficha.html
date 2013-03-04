@@ -1,54 +1,66 @@
 {% extends 'template.html' %}
 
 {% block header %}
-<h1>en ficha de producto añado esto, pero ademas voy a poner el header que estaba en la siguiente linea</h1>
+
 {{ parent() }}
 {% endblock %}
 {% block content %}
-<p>ficha del viaje</p>
-<ul>
-		<li>Id del viaje: {{v.id}}</li>
-		<li>tipo viaje: {{v.tipo}}</li>
-		<li>Despedida de Solteros: {{v.dds}}</li>
-		<li>Tutismo Activo: {{v.vta}}</li>
-		<li>Viajes de Novios: {{v.vdn}}</li>
-		<li>orden: {{v.orden}}</li>
-		<li>Localización: {{v.localizacion}}</li>
-		<li>Descripcion: {% autoescape false %}{{v.descripcion}}{% endautoescape %}</li>
-		<li>Imagenes:
-	        {% for img in v.imagenes%}
-	        	<img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}">
-	        {% endfor %}
-		</li>
-		<li>Actividades
-			<ul>
+
+
+
+    <!--<li>Id del viaje: {{v.id}}</li>
+    <li>tipo viaje: {{v.tipo}}</li>
+    <li>Despedida de Solteros: {{v.dds}}</li>
+    <li>Tutismo Activo: {{v.vta}}</li>
+    <li>Viajes de Novios: {{v.vdn}}</li>
+    <li>orden: {{v.orden}}</li>
+    <li>Localización: {{v.localizacion}}</li>-->
+        
+    <article class="feed-item">
+						
+        <header>
+           
+            {% for img in v.imagenes%}
+             	<div class="vo-oferta-foto">
+            		<img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}">
+                </div>
+                <h2 class="single-title">Id: {{v.id}} / {{img.alt}}</h2>
+            {% endfor %}
+            
+           
+            <div class="precio">
+                <span>{{v.precio}}</span>
+            </div>
+        </header> <!-- end article header -->
+                    
+        <div class="clear"></div> 
+        <section class="post_content clearfix" itemprop="articleBody">
+            <p>{% autoescape false %} {{v.descripcion}}{% endautoescape %}</p>
+        </section> <!-- end article section -->
+ 
+		<h4>Actividades</h4>
+			<ul class="feed-item-activ">
 			{% for act in v.actividades%}
-	        	<li>{{act.nombre}}</li>
-	        	<li>{% autoescape false %}{{act.descripcion}}{% endautoescape %}</li>
-	        	<li>
+	        	<li><h6>{{act.nombre}}</h6>
+	        	{% autoescape false %}{{act.descripcion}}{% endautoescape %}
+	        	<br/>
 	        		{% for img in act.imagenes%}
 	        			<img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}">
 	        		{% endfor %}	
 	        	</li>	
 	        {% endfor %}
 	    	</ul>
-		</li>
-		<li>{{v.precio}}</li>	
-		<li>
-			<p>Notas</p>
+		
+		<h5>Notas</h5>
 			{% for nota in v.notas %}
 				{{nota}}
 			{% endfor %}
-		</li>
-
-		<li>
-			<p>Documentos adjntos</p>
+		<h5>Documentos adjuntos</h5>
 			{% for adjunto in v.adjuntos %}
 				<a href="{{adjunto}}" target="_blank">{{adjunto}}</a>
 			{% endfor %}
-		</li>
-		<li>
-			<a href="index.php?category={{cat}}">Volver a listado</a>
-		</li>
-		</ul> 
+	
+		<a href="?category={{cat}}" class="volver2"  onClick="history.go(-1);return true;">Volver a listado</a>
+	
+	</article> 
 {% endblock %}

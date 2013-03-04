@@ -52,8 +52,8 @@ elseif (isset($_GET['category'])){
 		));
 
 }
-elseif (isset($_GET['id'])) {
-	$v = $viajes->getViaje($_GET['id']);
+elseif (isset($_GET['vid'])) {
+	$v = $viajes->getViaje($_GET['vid']);
 	if ($v == null)
 		echo $twig->render('index.html', array('name' => 'Fabien'));
 	else

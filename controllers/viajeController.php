@@ -16,8 +16,9 @@ class ControllerViajes {
 	public $viaje;
 
 	public function loadViajes(){
-
-		$xml = new XmlSimpleParser('http://www.viajes-online.net/feed-viajes.php','viaje');
+		
+		$xml = new XmlSimpleParser('http://www.grupotiempoactivo.com/feed-datos.php','viaje');
+		//$xml = new XmlSimpleParser('http://192.168.1.130/viajes-online.net/admcms/wp-content/themes/wp-foundation/XML-parser/XML-tipo/xmlWeb.xml','viaje');
 		$parseado = $xml->getItems();
 		//Console::log($parseado);
 
@@ -84,7 +85,7 @@ class ControllerViajes {
 
 		$travels = array();
 		$t = 'tipo';
-		if ($cat != 'Nuestras Ofertas')
+		if ($cat != 'nuestrasofertas')
 		{
 			foreach ($this->viajes as $v) {		
 				if ($v->$cat() == 1)
