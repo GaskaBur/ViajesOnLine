@@ -32,18 +32,20 @@ include('lib/includeTwig.php');			#Uso de plantillas Twig
 
 //Cargando Viajes
 $viajes = new ControllerViajes();
-$viajes -> loadViajes();
+$viajes -> loadViajes(); //Este método ahora carga viajes normales y ofertas.
 
-//Analizando URL
+//Analizando URL -> Parámetros _GET vid|category
 
-if (isset($_GET['id']) && isset($_GET['category'])) {
-	$v = $viajes->getViaje($_GET['id'],$_GET['category']);
+#Llega por URL id del viaje (vid) y categoría (category)
+if (isset($_GET['vid']) && isset($_GET['category'])) {
+	$v = $viajes->getViaje($_GET['vid'],$_GET['category']);
 	if ($v == null)
 		echo $twig->render('index.html', array('name' => 'Fabien'));
 	else
 		echo $twig->render('ficha.html', array('v' => $v,'cat'=>$_GET['category']));
 }
 
+#Llega por URL categoria del viaje (category)
 elseif (isset($_GET['category'])){
 	$viajes_cat = $viajes->GetViajesCategoria($_GET['category']);
 	echo $twig->render('categoria.html', array(
@@ -52,6 +54,8 @@ elseif (isset($_GET['category'])){
 		));
 
 }
+
+//Llega por URL el id del viaje (vid)
 elseif (isset($_GET['vid'])) {
 	$v = $viajes->getViaje($_GET['vid']);
 	if ($v == null)
@@ -60,6 +64,7 @@ elseif (isset($_GET['vid'])) {
 		echo $twig->render('ficha.html', array('v' => $v));
 }
 
+//No llega ningún parametro _GET
 else {
 	echo $twig->render('index.html', array('name' => 'Fabien'));
 }

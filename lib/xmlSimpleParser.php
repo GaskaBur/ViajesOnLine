@@ -39,17 +39,18 @@ foreach ($parseado as $item) {
 	$item -> entrada o conjunto de entradas que se busca
  	*/
  	
-	function __construct($url,$item) {
+	function __construct($url) {
 		$this->url = $url;
 		$this->xml = simplexml_load_file($this->url);
-		$this->item_main = $item;
 	}
 
 
 	/**
 	Devuelve un array con los items de la entrada correspondiente
 	*/
-	public function getItems ()	{
+	public function getItems ($_item)	{
+
+		$this->item_main = $_item;
 		
 		$exit = array();
 		$i = 0;
