@@ -11,7 +11,7 @@
 	{% for v in viajes %}
 		
         <li class="feed-list-item"><!--Imagenes:-->
-            <h5><a href="?vid={{v.id}}">{{v.id}}</a></h5>
+            <h5><a href="?vid={{v.id}}">{{v.titulo}}</a></h5>
             {% for img in v.imagenes%}
                 <div class="vo-ofertas-foto"><a href="?vid={{v.id}}"><img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}"></a></div>
             {% endfor %}

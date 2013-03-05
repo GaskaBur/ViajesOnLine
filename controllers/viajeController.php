@@ -68,7 +68,8 @@ class ControllerViajes {
 				$actividades,
 				$item->precio,
 				$notas,
-				$adjuntos
+				$adjuntos,
+				$item->titulo
 			);
 
 			$this->viajes[] = $viaje;

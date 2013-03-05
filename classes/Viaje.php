@@ -19,6 +19,9 @@ class Viaje {
 	#String - Tipo de Viaje [Nuestras Ofertas | Despedidad de Soltero | Viajes de Novios | Turismo Activo]
 	public $tipo;
 
+	#String - Título del viaje
+	public $titulo;
+
 	#---- Categorías:
 
 	public $dds;
@@ -51,7 +54,7 @@ class Viaje {
 		$_agenciaDeDespedidas, $_viajesturismoactivo, $_novioViajes, 
 		$_localizacion, $_descripcion, $_imagenes = null, 
 		$_actividades = null, $_precio, $_notas = null, 
-		$_adjuntos = null)
+		$_adjuntos = null, $_titulo)
 	{
 		$this->id = $_id;
 		$this->orden = $_orden;
@@ -66,6 +69,7 @@ class Viaje {
 		$this->actividades = $_actividades;
 		$this->notas = $_notas;
 		$this->adjuntos = $_adjuntos;
+		$this->titulo = $_titulo;
 	}	
 
 	public function viajesturismoactivo(){
