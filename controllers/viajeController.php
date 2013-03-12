@@ -39,7 +39,7 @@ class ControllerViajes {
 		$this->addViajes('viajenovios',$xml); //viajes de novios <viajenovios>
 		$this->addViajes('ofertaviaje',$xml); //ofertas <ofertaviaje>		
 
-		Console::log($this->viajes); //Con FireBug se puede ver los viajes obtenidos, comentar si no se quiere esto.
+		 //Con FireBug se puede ver los viajes obtenidos, comentar si no se quiere esto.
 	}
 
 	/**
@@ -48,7 +48,7 @@ class ControllerViajes {
 	public  function GetViajesCategoria($cat){
 		$travels = array();
 		$t = 'tipo';
-		if ($cat != 'NuestrasOfertas' && $cat != "") 
+		if ($cat != 'portada' && $cat != "") 
 		{
 			//Carga los viajes de la categoría que corresponda (No ofertas)
 			foreach ($this->viajes as $v) {		
@@ -62,7 +62,10 @@ class ControllerViajes {
 			foreach ($this->viajesOferta as $v) {		
 				$travels[] =  $v ;
 			}
+			
 		}
+		Console::log($travels);
+		$travels = $this->ordenarViajes($travels);
 		return $travels;
 	}
 
@@ -89,7 +92,7 @@ class ControllerViajes {
 					break;
 				}
 		}
-		else if ($cat == 'NuestrasOfertas')
+		else if ($cat == 'portada')
 		{
 			//La categoría espeficada es 'NuestrasOfertas' por tanto se busca en $this->viajesOferta
 			foreach ($this->viajesOferta as $v){	
@@ -180,5 +183,50 @@ class ControllerViajes {
 		}
 	}
 
+	/**
+	#Metodo Shell de ordenación
+	# Criterio de ordenación:
+	# de menor a mayor por número de orden
+	# si el númeor de orden coincide ordeno de mayor a menor por número de id
+	# entendiendo así que ha id más alta, el viaje es mas novedoso.
+	*/
+	private function ordenarViajes($array)
+	{
+		$v = $array;
+		$n = sizeof($v);
+        $incremento = $n;
+
+        do {
+            $incremento = variant_int ($incremento / 2);
+            for ($k = 0; $k < $incremento; $k++) {
+                for ($i = $incremento + $k; $i < $n; $i = $i + $incremento) {
+                    $j = $i;
+                    while ($j - $incremento >= 0 ) {
+	                    $x =  (int) $v[$j]->orden;                    
+	                    $y = (int) $v[$j - $incremento]->orden;
+	                    if ($x < $y )
+		                    {
+		                    	#el númeo de orden es menor
+		                    	$tmp = $v[$j];
+		                        $v[$j] = $v[$j - $incremento];
+		                        $v[$j - $incremento] = $tmp;
+		                    }
+		                if ($x == $y) {
+		                	if ((int)$v[$j]->id > (int) $v[$j - $incremento]->id)
+		                	{
+		                		#el número de id es mayor
+		                		$tmp = $v[$j];
+		                        $v[$j] = $v[$j - $incremento];
+		                        $v[$j - $incremento] = $tmp;
+		                	}
+		                } 
+	                     $j = $j - $incremento;
+                    }
+                }
+            }
+        } while ($incremento > 1);
+        
+        return $v;
+	}
 }
 ?>

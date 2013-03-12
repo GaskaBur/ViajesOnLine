@@ -48,10 +48,20 @@ if (isset($_GET['vid']) && isset($_GET['category'])) {
 #Llega por URL categoria del viaje (category)
 elseif (isset($_GET['category'])){
 	$viajes_cat = $viajes->GetViajesCategoria($_GET['category']);
-	echo $twig->render('categoria.html', array(
-		'viajes' => $viajes_cat,
-		'cat' => $_GET['category'],
-		));
+	if ($_GET['category'] == 'portada')
+	{
+		echo $twig->render('portada.html', array(
+			'viajes' => $viajes_cat,
+			'cat' => $_GET['category'],
+			));
+	}
+	else
+	{
+		echo $twig->render('categoria.html', array(
+			'viajes' => $viajes_cat,
+			'cat' => $_GET['category'],
+			));
+	}
 
 }
 

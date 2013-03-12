@@ -1,0 +1,59 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<!-- SLIDE: TOP 3 -->
+
+
+{% if viajes|length == 0 %}
+<p>no existen viajes</p>
+{% else %}	
+<!--	<p>Listado de los Viajes</p>
+
+<!-- SLIDE: TOP 3 -->
+<div class="eight columns">                        
+<div id="featured" >
+
+
+{% for i in range(0, 2) %}
+    <!-- {{i}} -->          
+    <div style="background-color: #F2F2F2;" class="twelve column">
+        <div class="orbit-foto"><a href="?vid={{viajes[i].id}}"><img src="{{viajes[i].imagenes[0].url}}" alt="{{viajes[i].imagenes[0].alt}}" ></a></div><br />
+        <div class="orbit-texto" >
+        <h3><a href="{{viajes[i].id}}">{{viajes[i].titulo}}</a></h3>
+        <p>{% autoescape false %} {{viajes[i].descripcion}}{% endautoescape %}</p>
+        <a href="http://192.168.1.130/viajes-online.net/admcms/ofertas/semana-en-nueva-york/" class="leermas">Leer más »</a></div> 
+    </div>
+{% endfor %}
+</div>
+</div>
+<script type="text/javascript">
+   $(window).load(function() {
+       $('#featured').orbit({ 
+        fluid: '16x6'
+       });
+   });
+</script>
+
+
+<!-- OFERTAS 3,4,5: EN TRES COLUMNAS  -->
+                                                                        
+<ul class="ultimas-ofertas eight columns">
+{% for i in range(3, viajes|length -1) %}
+    <!-- {{i}} -->               
+    <li id="post-{{viajes[i].id}}" class="post-45 ofertas type-ofertas status-publish hentry clearfix four column" role="article">
+        
+        <h5><a href="?vid={{viajes[i].id}}" rel="bookmark" title="{{viajes[i].titulo}}">{{viajes[i].titulo}}</a></h5>
+        <div class="vo-ofertas-foto">
+            <a href="?vid={{viajes[i].id}}" title="{{viajes[i].titulo}}" ><img src="{{viajes[i].imagenes[0].url}}" class="attachment-medium wp-post-image" alt="{{viajes[i].imagenes[0].alt}}" /></a>
+        </div>                  
+
+        <div class="precio"><span>
+            {{viajes[i].precio}}</span>
+        </div>
+    </li> <!-- end article -->        
+{% endfor %}
+	
+</ul>
+
+{% endif %}
+{% endblock %} 
