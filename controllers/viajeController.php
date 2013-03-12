@@ -92,7 +92,7 @@ class ControllerViajes {
 					break;
 				}
 		}
-		else if ($cat == 'portada')
+		else if ($cat == 'portada' || $cat == 'nuestrasofertas')
 		{
 			//La categoría espeficada es 'NuestrasOfertas' por tanto se busca en $this->viajesOferta
 			foreach ($this->viajesOferta as $v){	
