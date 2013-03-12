@@ -17,7 +17,7 @@
 {% for i in range(0, 2) %}
     <!-- {{i}} -->          
     <div style="background-color: #F2F2F2;" class="twelve column">
-        <div class="orbit-foto"><a href="?vid={{viajes[i].id}}"><img src="{{viajes[i].imagenes[0].url}}" alt="{{viajes[i].imagenes[0].alt}}" ></a></div><br />
+        <div class="orbit-foto"><a href="?id={{viajes[i].id}}"><img src="{{viajes[i].imagenes[0].url}}" alt="{{viajes[i].imagenes[0].alt}}" ></a></div><br />
         <div class="orbit-texto" >
         <h3><a href="{{viajes[i].id}}">{{viajes[i].titulo}}</a></h3>
         <p>{% autoescape false %} {{viajes[i].descripcion}}{% endautoescape %}</p>
@@ -42,9 +42,9 @@
     <!-- {{i}} -->               
     <li id="post-{{viajes[i].id}}" class="post-45 ofertas type-ofertas status-publish hentry clearfix four column" role="article">
         
-        <h5><a href="?vid={{viajes[i].id}}" rel="bookmark" title="{{viajes[i].titulo}}">{{viajes[i].titulo}}</a></h5>
+        <h5><a href="?id={{viajes[i].id}}" rel="bookmark" title="{{viajes[i].titulo}}">{{viajes[i].titulo}}</a></h5>
         <div class="vo-ofertas-foto">
-            <a href="?vid={{viajes[i].id}}" title="{{viajes[i].titulo}}" ><img src="{{viajes[i].imagenes[0].url}}" class="attachment-medium wp-post-image" alt="{{viajes[i].imagenes[0].alt}}" /></a>
+            <a href="?id={{viajes[i].id}}" title="{{viajes[i].titulo}}" ><img src="{{viajes[i].imagenes[0].url}}" class="attachment-medium wp-post-image" alt="{{viajes[i].imagenes[0].alt}}" /></a>
         </div>                  
 
         <div class="precio"><span>

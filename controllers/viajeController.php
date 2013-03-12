@@ -48,7 +48,7 @@ class ControllerViajes {
 	public  function GetViajesCategoria($cat){
 		$travels = array();
 		$t = 'tipo';
-		if ($cat != 'portada' && $cat != "") 
+		if ($cat != 'portada' && $cat != 'nuestrasofertas' && $cat != "") 
 		{
 			//Carga los viajes de la categoría que corresponda (No ofertas)
 			foreach ($this->viajes as $v) {		

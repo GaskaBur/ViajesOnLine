@@ -34,11 +34,11 @@ include('lib/includeTwig.php');			#Uso de plantillas Twig
 $viajes = new ControllerViajes();
 $viajes -> loadViajes(); //Este método ahora carga viajes normales y ofertas.
 
-//Analizando URL -> Parámetros _GET vid|category
+//Analizando URL -> Parámetros _GET id|category
 
-#Llega por URL id del viaje (vid) y categoría (category)
-if (isset($_GET['vid']) && isset($_GET['category'])) {
-	$v = $viajes->getViaje($_GET['vid'],$_GET['category']);
+#Llega por URL id del viaje (id) y categoría (category)
+if (isset($_GET['id']) && isset($_GET['category'])) {
+	$v = $viajes->getViaje($_GET['id'],$_GET['category']);
 	if ($v == null)
 		echo $twig->render('index.html', array('name' => 'Fabien'));
 	else
@@ -65,9 +65,9 @@ elseif (isset($_GET['category'])){
 
 }
 
-//Llega por URL el id del viaje (vid)
-elseif (isset($_GET['vid'])) {
-	$v = $viajes->getViaje($_GET['vid']);
+//Llega por URL el id del viaje (id)
+elseif (isset($_GET['id'])) {
+	$v = $viajes->getViaje($_GET['id']);
 	if ($v == null)
 		echo $twig->render('index.html', array('name' => 'Fabien'));
 	else
