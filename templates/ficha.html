@@ -77,9 +77,6 @@
 		{% if tieneFicherosAdjuntos == 1 %}
 		<h5>Documentos adjuntos</h5>
 			{% for adjunto in v.adjuntos %}
-			{% if adjunto == "" %}
-				vacio
-			{% endif %}
 				<a href="{{adjunto}}" target="_blank">{{adjunto}}</a>
 			{% endfor %}
 		{% endif %}
