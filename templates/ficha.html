@@ -35,7 +35,7 @@
                     
         <div class="clear"></div> 
         <section class="post_content clearfix" itemprop="articleBody">
-            <p>{% autoescape false %} {{v.descripcion}}{% endautoescape %}</p>
+            <p>{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)}}{% endautoescape %}</p>
         </section> <!-- end article section -->
  
 		<h4>Actividades</h4>

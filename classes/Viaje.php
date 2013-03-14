@@ -83,5 +83,28 @@ class Viaje {
 	public function agenciaDeDespedidas(){
 		return $this->dds;
 	}
+
+	/**
+	Devuelve un string con el numero de palabras en limit en base al parametro text.
+	*/
+	public function cuantasPalabras($text, $limit) {
+	  $cant_palabras=explode(' ',$text);
+      if (sizeof($cant_palabras) > $limit)
+      {
+      	$text = "";
+      	for ($i = 0; $i<= $limit; $i++)
+	      	$text .= $cant_palabras[$i].' ';
+      }
+      $text = $this->quitarEtiquetasHtml($text);
+      return $text;
+    }
+
+    /**
+    Elimina las etiquetas html del parametro String.
+    */
+    public function quitarEtiquetasHtml($text)
+    {
+    	return  strip_tags($text);
+    }
 }
 ?>

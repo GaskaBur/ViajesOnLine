@@ -45,7 +45,7 @@ class ControllerViajes {
 	/**
 	Obtiene los viajes de la categoría especificada
 	*/
-	public  function GetViajesCategoria($cat){
+	public  function GetViajesCategoria($cat,$order = null){
 		$travels = array();
 		$t = 'tipo';
 		if ($cat != 'portada' && $cat != 'nuestrasofertas' && $cat != "") 
@@ -64,8 +64,17 @@ class ControllerViajes {
 			}
 			
 		}
+
+		if ($order == 'true')
+		{
+			$travels = $this->ordenarViajes($travels);
+		}
+		elseif ($order == 'random')
+		{
+			shuffle($travels);
+		}
 		Console::log($travels);
-		$travels = $this->ordenarViajes($travels);
+		
 		return $travels;
 	}
 
@@ -228,5 +237,6 @@ class ControllerViajes {
         
         return $v;
 	}
+
 }
 ?>
