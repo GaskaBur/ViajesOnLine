@@ -210,7 +210,7 @@ class ControllerViajes {
         $incremento = $n;
 
         do {
-            $incremento = variant_int ($incremento / 2);
+            $incremento = (int) ($incremento / 2);
             for ($k = 0; $k < $incremento; $k++) {
                 for ($i = $incremento + $k; $i < $n; $i = $i + $incremento) {
                     $j = $i;
