@@ -37,7 +37,7 @@
         <section class="post_content clearfix" itemprop="articleBody">
             <p>{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)}}{% endautoescape %}</p>
         </section> <!-- end article section -->
- 
+ 		{% if v.actividades|length > 0 %}
 		<h4>Actividades</h4>
 			<ul class="feed-item-activ">
 			{% for act in v.actividades%}
@@ -50,15 +50,39 @@
 	        	</li>	
 	        {% endfor %}
 	    	</ul>
-		
+	    {% endif %}
+
+	    {% set tieneNotas = 0 %}
+    	{% for nota in v.notas %}
+			{% if nota != "" %}
+				{% set tieneNotas = 1 %}
+			{% endif %}				
+		{% endfor %}
+
+    	{% set tieneFicherosAdjuntos = 0 %}
+    	{% for adjunto in v.adjuntos %}
+			{% if adjunto != "" %}
+				{% set tieneFicherosAdjuntos = 1 %}
+			{% endif %}				
+		{% endfor %}
+
+	    
+		{% if tieneNotas == 1 %}
 		<h5>Notas</h5>
 			{% for nota in v.notas %}
 				{{nota}}
 			{% endfor %}
+		{% endif %}
+		
+		{% if tieneFicherosAdjuntos == 1 %}
 		<h5>Documentos adjuntos</h5>
 			{% for adjunto in v.adjuntos %}
+			{% if adjunto == "" %}
+				vacio
+			{% endif %}
 				<a href="{{adjunto}}" target="_blank">{{adjunto}}</a>
 			{% endfor %}
+		{% endif %}
 	
 		<a href="#" class="volver2"  onClick="history.go(-1);return true;">Volver a listado</a>
 	

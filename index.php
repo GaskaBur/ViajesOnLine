@@ -47,9 +47,12 @@ if (isset($_GET['id']) && isset($_GET['category'])) {
 
 #Llega por URL categoria del viaje (category)
 elseif (isset($_GET['category'])){
-	$viajes_cat = $viajes->GetViajesCategoria($_GET['category'],
+
+	$viajes_cat = $viajes->GetViajesCategoria(
+			$_GET['category'],
 			isset($_GET['order']) ? $_GET['order'] : null
-		);
+			);
+	
 	if ($_GET['category'] == 'portada')
 	{
 		echo $twig->render('portada.html', array(
