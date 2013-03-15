@@ -1,9 +1,16 @@
 {% extends 'template.html' %}
 
+{% block head %}
 {% if putHead == 1%}
-{% block title %}{{v.quitarEtiquetasHtml(v.titulo) }}{% endblock %}
-{% block descriptionContent %}{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)|slice(0, 160)}}{% endautoescape %}{% endblock %}
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{{v.titulo}}</title>
+<meta name="description" content="{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)|slice(0,160)}}{% endautoescape %}"/>
+</head>
+<body>
 {% endif %}
+{% endblock %}
 
 {% block content %}
 
@@ -76,4 +83,8 @@
 		<a href="#" class="volver2"  onClick="history.go(-1);return true;">Volver a listado</a>
 	
 	</article> 
+{% if putHead == 1%}
+</body>
+</html>
+{% endif %}
 {% endblock %}
