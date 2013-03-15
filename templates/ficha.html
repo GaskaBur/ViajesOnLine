@@ -1,16 +1,12 @@
 {% extends 'template.html' %}
 
-{% block content %}
 {% if putHead == 1%}
-	{% autoescape false %}
-		<script type="text/javascript">		
-			var re = /(<([^>]+)>)/gi;		
-			parent.document.title ="{{v.quitarEtiquetasHtml(v.titulo) }}";
-			var d = "{{v.quitarEtiquetasHtml(v.descripcion|e('js')) }}";		
-			document.getElementsByTagName('head')[0].innerHTML += '<meta name="description" content="'+d.substring(0,160).replace(re,"")+'">';
-		</script>
-	{% endautoescape %}
+{% block title %}{{v.quitarEtiquetasHtml(v.titulo) }}{% endblock %}
+{% block descriptionContent %}{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)|slice(0, 160)}}{% endautoescape %}{% endblock %}
 {% endif %}
+
+{% block content %}
+
 
     <article class="feed-item">
 						

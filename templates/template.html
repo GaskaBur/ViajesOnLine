@@ -1,6 +1,12 @@
+<!DOCTYPE HTML>
 
 
-        {% block content %}
-        
-            
-        {% endblock %}
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<meta name="description" content="{% block descriptionContent%}{% endblock%}" />
+</head>
+
+{% block content %}            
+{% endblock %}
+</html>
