@@ -30,3 +30,9 @@ public function quitarEtiquetasHtml($text) ->return string
 Elimina las etiquetas html.
 ==============================================
 
+15/03/2013 
+
+Añade el titulo del viaje a <titlte></title> y la descripción a <meta name="description" content="">
+para que esto funcione se tiene que añadir el parametro head en la cabecera GET, el contenido de head es indiferente.
+
+==============================================

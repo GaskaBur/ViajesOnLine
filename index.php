@@ -42,7 +42,15 @@ if (isset($_GET['id']) && isset($_GET['category'])) {
 	if ($v == null)
 		echo $twig->render('index.html', array('name' => 'Fabien'));
 	else
-		echo $twig->render('ficha.html', array('v' => $v,'cat'=>$_GET['category']));
+	{
+		$putHead = 0;
+		isset($_GET['head']) ? $putHead = 1 : $putHead = 0;
+		echo $twig->render('ficha.html', array(
+			'v' => $v,
+			'putHead' => $putHead,
+			'cat'=>$_GET['category']
+			));
+	}
 }
 
 #Llega por URL categoria del viaje (category)
@@ -76,7 +84,11 @@ elseif (isset($_GET['id'])) {
 	if ($v == null)
 		echo $twig->render('index.html', array('name' => 'Fabien'));
 	else
-		echo $twig->render('ficha.html', array('v' => $v));
+	{
+		$putHead = 0;
+		isset($_GET['head']) ? $putHead = 1 : $putHead = 0;
+		echo $twig->render('ficha.html', array('v' => $v,'putHead' => $putHead));
+	}
 }
 
 //No llega ningún parametro _GET

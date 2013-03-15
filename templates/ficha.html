@@ -1,21 +1,17 @@
 {% extends 'template.html' %}
 
-{% block header %}
-
-{{ parent() }}
-{% endblock %}
 {% block content %}
+{% if putHead == 1%}
+	{% autoescape false %}
+		<script type="text/javascript">		
+			var re = /(<([^>]+)>)/gi;		
+			parent.document.title ="{{v.quitarEtiquetasHtml(v.titulo) }}";
+			var d = "{{v.quitarEtiquetasHtml(v.descripcion|e('js')) }}";		
+			document.getElementsByTagName('head')[0].innerHTML += '<meta name="description" content="'+d.substring(0,160).replace(re,"")+'">';
+		</script>
+	{% endautoescape %}
+{% endif %}
 
-
-
-    <!--<li>Id del viaje: {{v.id}}</li>
-    <li>tipo viaje: {{v.tipo}}</li>
-    <li>Despedida de Solteros: {{v.dds}}</li>
-    <li>Tutismo Activo: {{v.vta}}</li>
-    <li>Viajes de Novios: {{v.vdn}}</li>
-    <li>orden: {{v.orden}}</li>
-    <li>Localización: {{v.localizacion}}</li>-->
-        
     <article class="feed-item">
 						
         <header>
