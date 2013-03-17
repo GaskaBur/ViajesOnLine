@@ -1,0 +1,21 @@
+{% extends 'template.html' %}
+
+{% block content %}
+
+{% if viajes|length == 0 %}
+	<p>no existen viajes</p>
+{% else %}	
+	{% for i in range(0, 2) %}
+	    <div  class="widget">
+	    	<!-- WIDGET -->
+	        <div><a href="?id={{viajes[i].id}}"><img src="{{viajes[i].imagenes[0].url}}" alt="{{viajes[i].imagenes[0].alt}}" ></a></div>
+	        <br />
+	        <div>
+		        <h3><a href="?id={{viajes[i].id}}">{{viajes[i].titulo}}</a></h3>
+		        <p>{% autoescape false %} {{viajes[i].cuantasPalabras(viajes[i].descripcion,25)}}{% endautoescape %}</p>
+		        <a href="?id={{viajes[i].id}}" class="leermas">Leer más »</a>
+	    	</div> 
+	    </div>
+	{% endfor %}
+{% endif %}
+{% endblock %} 

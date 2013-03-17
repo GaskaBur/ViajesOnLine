@@ -9,7 +9,8 @@ Viajes On Line =============================
 ==============================================
 14/03/2013  
 
-**** Añadida funcionalidad order:
+Añadida funcionaliad order
+==============================================
 
 Categorías recibe el parámetro ?order
 - Si no está definido se ordenan los viajes según llegan.
@@ -35,4 +36,10 @@ Elimina las etiquetas html.
 Añade el titulo del viaje a <titlte></title> y la descripción a <meta name="description" content="">
 para que esto funcione se tiene que añadir el parametro head en la cabecera GET, el contenido de head es indiferente.
 
+Implmentación Widget - 0.0.
 ==============================================
+17/03/2013
+
+Para mostrar el widget acceder a la url como en el siguiente ejemplo:
+category=aganciadespedidas&widget=true&order=random
+Pendiente de desarrollar el HTML final.

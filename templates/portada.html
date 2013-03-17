@@ -21,7 +21,7 @@
         <div class="orbit-texto" >
         <h3><a href="?id={{viajes[i].id}}">{{viajes[i].titulo}}</a></h3>
         <p>{% autoescape false %} {{viajes[i].cuantasPalabras(viajes[i].descripcion,25)}}{% endautoescape %}</p>
-        <a href="http://192.168.1.130/viajes-online.net/admcms/ofertas/semana-en-nueva-york/" class="leermas">Leer más »</a></div> 
+        <a href="?id={{viajes[i].id}}" class="leermas">Leer más »</a></div> 
     </div>
 {% endfor %}
 </div>

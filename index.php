@@ -58,22 +58,38 @@ elseif (isset($_GET['category'])){
 
 	$viajes_cat = $viajes->GetViajesCategoria(
 			$_GET['category'],
-			isset($_GET['order']) ? $_GET['order'] : null
+			isset($_GET['order']) ? $_GET['order'] : null,
+			isset($_GET['widget']) ? $_GET['widget'] : null
+
 			);
 	
 	if ($_GET['category'] == 'portada')
 	{
-		echo $twig->render('portada.html', array(
-			'viajes' => $viajes_cat,
-			'cat' => $_GET['category'],
+		if(!isset($_GET['widget']))
+			echo $twig->render('portada.html', array(
+				'viajes' => $viajes_cat,
+				'cat' => $_GET['category'],
 			));
+		else
+			echo $twig->render('widget.html', array(
+				'viajes' => $viajes_cat,
+				'cat' => $_GET['category'],
+			));
+
 	}
 	else
 	{
-		echo $twig->render('categoria.html', array(
-			'viajes' => $viajes_cat,
-			'cat' => $_GET['category'],
+		if(!isset($_GET['widget']))
+			echo $twig->render('categoria.html', array(
+				'viajes' => $viajes_cat,
+				'cat' => $_GET['category'],
 			));
+		else
+			echo $twig->render('widget.html', array(
+				'viajes' => $viajes_cat,
+				'cat' => $_GET['category'],
+			));
+
 	}
 
 }

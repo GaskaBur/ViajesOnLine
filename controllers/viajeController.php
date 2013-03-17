@@ -45,7 +45,7 @@ class ControllerViajes {
 	/**
 	Obtiene los viajes de la categoría especificada
 	*/
-	public  function GetViajesCategoria($cat,$order = null){
+	public  function GetViajesCategoria($cat,$order = null,$widget = null){
 
 		#obteniendo viajes ------------------------------------------------------------------------------
 		$travels = array();
