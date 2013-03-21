@@ -1,57 +1,43 @@
 {% extends 'template.html' %}
 
-{% block head %}
-{% if putHead == 1%}
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>{{v.titulo}}</title>
-<meta name="description" content="{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)|slice(0,160)}}{% endautoescape %}"/>
-</head>
-<body>
-{% endif %}
-{% endblock %}
-
 {% block content %}
+{% if putHead == 1 %}
+
+<title>{{v.titulo}} | {{cat}} |Viajes-Online.net</title>
+<meta name="description" content="{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)|slice(0,160)}}{% endautoescape %}"/>
 
 
-    <article class="feed-item">
+{% else %}
+
+    <!--<li>Id del viaje: {{v.id}}</li>
+    <li>tipo viaje: {{v.tipo}}</li>
+    <li>Despedida de Solteros: {{v.dds}}</li>
+    <li>Tutismo Activo: {{v.vta}}</li>
+    <li>Viajes de Novios: {{v.vdn}}</li>
+    <li>orden: {{v.orden}}</li>
+    <li>Localización: {{v.localizacion}}</li>-->
+        
+    <article class="feed-item ficha-viaje row">
 						
-        <header>
-           
+        <header class="twelve columns">
+            <h1 class="single-title">{{v.titulo}}</h1>
             {% for img in v.imagenes%}
              	<div class="vo-oferta-foto">
             		<img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}">
-                </div>
-                <h2 class="single-title">Id: {{v.titulo}} / {{img.alt}}</h2>
-            {% endfor %}
-            
+                </div>               
+            {% endfor %}            
            
             <div class="precio">
                 <span>{{v.precio}}</span>
             </div>
         </header> <!-- end article header -->
                     
-        <div class="clear"></div> 
-        <section class="post_content clearfix" itemprop="articleBody">
-            <p>{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)}}{% endautoescape %}</p>
-        </section> <!-- end article section -->
- 		{% if v.actividades|length > 0 %}
-		<h4>Actividades</h4>
-			<ul class="feed-item-activ">
-			{% for act in v.actividades%}
-	        	<li><h6>{{act.nombre}}</h6>
-	        	{% autoescape false %}{{act.descripcion}}{% endautoescape %}
-	        	<br/>
-	        		{% for img in act.imagenes%}
-	        			<img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}">
-	        		{% endfor %}	
-	        	</li>	
-	        {% endfor %}
-	    	</ul>
-	    {% endif %}
-
-	    {% set tieneNotas = 0 %}
+         
+        <div class="post_content twelve columns" itemprop="articleBody">
+            <p>{% autoescape false %} {{v.descripcion}}{% endautoescape %}</p>
+        </div> <!-- end article section -->
+		
+		{% set tieneNotas = 0 %}
     	{% for nota in v.notas %}
 			{% if nota != "" %}
 				{% set tieneNotas = 1 %}
@@ -65,26 +51,47 @@
 			{% endif %}				
 		{% endfor %}
 
-	    
-		{% if tieneNotas == 1 %}
-		<h5>Notas</h5>
+       
+        {% if v.actividades|length > 0 %}
+        <section class="actividades{% if tieneNotas == 1 or tieneFicherosAdjuntos == 1 %} bordedcha nine{%else%} twelve{% endif %} columns">
+		<h4>Actividades incluidas</h4>
+			<ol class="feed-item-activ">
+			{% for act in v.actividades %}
+	        	<li class="twelve columns">
+                <h6>{{act.nombre}}</h6>
+	        	<p>{% autoescape false %}{{act.descripcion}}{% endautoescape %}</p>	        	
+	        		{% for img in act.imagenes%}
+                    <div class="miniatura four columns"> 
+	        			<a href="{{img.url}}" title="{{img.title}}" rel="nofollow" ><img src="{{img.url}}" alt="{{img.alt}}" ></a>
+                    </div>
+	        		{% endfor %}                	
+	        	</li>                	
+	        {% endfor %}
+	    	</ol>
+       </section>
+       {% endif %}
+       
+        {% if tieneNotas == 1 %}
+		<section class="notas three columns">        
+		<h5>Info extra</h5>
 			{% for nota in v.notas %}
-				{{nota}}
-			{% endfor %}
-		{% endif %}
-		
-		{% if tieneFicherosAdjuntos == 1 %}
-		<h5>Documentos adjuntos</h5>
+				<p>{{nota}}</p>
+			{% endfor %}      
+        </section>
+        {% endif %}
+        
+        {% if tieneFicherosAdjuntos == 1 %}
+        <section class="adjuntos three columns">
+		<h5>Descarga + info</h5>
 			{% for adjunto in v.adjuntos %}
-				<a href="{{adjunto}}" target="_blank">{{adjunto}}</a>
+            	{% if adjunto == "" %}                	
+				{% else%}
+				<a href="{{adjunto}}" rel="nofollow" class="doc" target="_blank" title="Descarga la información de la oferta">Descarga la información de la oferta</a>
+                {% endif %}
 			{% endfor %}
-		{% endif %}
-	
-		<a href="#" class="volver2"  onClick="history.go(-1);return true;">Volver a listado</a>
-	
+		</section>
+        {% endif %}
+       		
 	</article> 
-{% if putHead == 1%}
-</body>
-</html>
 {% endif %}
 {% endblock %}

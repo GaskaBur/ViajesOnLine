@@ -1,26 +1,21 @@
 {% extends 'template.html' %}
 
 {% block content %}
-<!--<p><a href="index.php">Volver</a>
--->
+
 {% if viajes|length == 0 %}
 <p>no existen viajes</p>
 {% else %}	
-<!--	<p>Listado de los Viajes</p>
--->	<ul class="feed-list">
+<ul class="feed-list">
 	{% for v in viajes %}
 		
-        <li class="feed-list-item"><!--Imagenes:-->
-            <h5><a href="?id={{v.id}}">{{v.titulo}}</a></h5>
+        <li class="feed-list-item">
+            <h5><a href="?vid={{v.id}}&category={{cat}}" title="{{v.titulo}}" rel="follow">{{v.titulo}}</a></h5>
             {% for img in v.imagenes%}
-                <div class="vo-ofertas-foto"><a href="?id={{v.id}}"><img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}"></a></div>
+                <div class="vo-oferta-foto"><a href="?vid={{v.id}}&category={{cat}}"  title="{{v.titulo}}" rel="follow"><img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}"></a></div>
             {% endfor %}
        
-            <div class="precio">{{v.precio}}</div>
-            <div class="precio">{{v.orden}}</div>
-            
-            <a href="?id={{v.id}}" class="detalles">Ver detalles</a>
-            <!-- <a href="?id={{v.id}}&amp;category={{cat}}">Ver detalles</a>-->
+            <div class="precio">{{v.precio}}</div> 
+                     
        </li>  
 	{% endfor %}
     </ul>   

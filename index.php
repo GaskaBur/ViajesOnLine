@@ -38,19 +38,7 @@ $viajes -> loadViajes(); //Este método ahora carga viajes normales y ofertas.
 
 #Llega por URL id del viaje (id) y categoría (category)
 if (isset($_GET['id']) && isset($_GET['category'])) {
-	$v = $viajes->getViaje($_GET['id'],$_GET['category']);
-	if ($v == null)
-		echo $twig->render('index.html', array('name' => 'Fabien'));
-	else
-	{
-		$putHead = 0;
-		isset($_GET['head']) ? $putHead = 1 : $putHead = 0;
-		echo $twig->render('ficha.html', array(
-			'v' => $v,
-			'putHead' => $putHead,
-			'cat'=>$_GET['category']
-			));
-	}
+	getterID($viajes->getViaje($_GET['id'],$_GET['category']),$twig);
 }
 
 #Llega por URL categoria del viaje (category)
@@ -96,20 +84,29 @@ elseif (isset($_GET['category'])){
 
 //Llega por URL el id del viaje (id)
 elseif (isset($_GET['id'])) {
-	$v = $viajes->getViaje($_GET['id']);
-	if ($v == null)
-		echo $twig->render('index.html', array('name' => 'Fabien'));
-	else
-	{
-		$putHead = 0;
-		isset($_GET['head']) ? $putHead = 1 : $putHead = 0;
-		echo $twig->render('ficha.html', array('v' => $v,'putHead' => $putHead));
-	}
+	getterID($viajes->getViaje($_GET['id']),$twig);
+	
 }
 
 //No llega ningún parametro _GET
 else {
 	echo $twig->render('index.html', array('name' => 'Fabien'));
+}
+
+/**
+Esta funcion es similar para conseguir la ficha del viaje para los getters ID e ID+CATEGORY
+*/
+function getterID($v,$twig)
+{
+	if ($v == null)
+		echo $twig->render('index.html', array('name' => 'Fabien'));
+	else
+	{
+		$putHead = 0;
+		$c = $v->getCategoria();
+		isset($_GET['head']) ? $putHead = 1 : $putHead = 0;
+		echo $twig->render('ficha.html', array('v' => $v,'putHead' => $putHead,'cat' => $c));
+	}
 }
 
 

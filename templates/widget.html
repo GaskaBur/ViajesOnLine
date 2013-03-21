@@ -6,15 +6,17 @@
 	<p>no existen viajes</p>
 {% else %}	
 	{% for i in range(0, 2) %}
-	    <div  class="widget">
+	    <div class="widget">
 	    	<!-- WIDGET -->
-	        <div><a href="?id={{viajes[i].id}}"><img src="{{viajes[i].imagenes[0].url}}" alt="{{viajes[i].imagenes[0].alt}}" ></a></div>
-	        <br />
-	        <div>
-		        <h3><a href="?id={{viajes[i].id}}">{{viajes[i].titulo}}</a></h3>
+            <h5><a href="?vid={{viajes[i].id}}">{{viajes[i].titulo}}</a></h5>
+	        <div class="vo-oferta-foto"><a href="?vid={{viajes[i].id}}"><img src="{{viajes[i].imagenes[0].url}}" alt="{{viajes[i].imagenes[0].alt}}" ></a></div>
+	        
+
+			<div class="precio"><span>{{viajes[i].precio}}</span></div>
+	        <!--<div>		        
 		        <p>{% autoescape false %} {{viajes[i].cuantasPalabras(viajes[i].descripcion,25)}}{% endautoescape %}</p>
-		        <a href="?id={{viajes[i].id}}" class="leermas">Leer más »</a>
-	    	</div> 
+		        <a href="?vid={{viajes[i].id}}" class="leermas">Leer más »</a>
+	    	</div> -->
 	    </div>
 	{% endfor %}
 {% endif %}

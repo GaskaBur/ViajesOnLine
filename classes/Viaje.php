@@ -106,5 +106,22 @@ class Viaje {
     {
     	return  strip_tags($text);
     }
+
+    public function getCategoria()
+    {
+    	$categoria = '';
+    	if ($this->vdn == 1)
+    		$categoria .='Viajes de Novios';
+    	if ($this->dds == 1)
+    		$categoria .= 'Despedidas de Soltero';
+    	if ($this->vta == 1)
+    		if ($categoria == '')
+    			$categoria .= 'Turismo Activo';
+    		else
+    			$categoria .= ' | Turismo Activo';
+    	if ($categoria == '')
+    		$categoria = 'Nuestras Ofertas';
+    	return $categoria;
+    }
 }
 ?>
