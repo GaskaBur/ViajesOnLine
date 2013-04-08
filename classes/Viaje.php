@@ -27,6 +27,7 @@ class Viaje {
 	public $dds;
 	public $vta;
 	public $vdn;
+	public $mgo;
 
 	#String - Localización -> lugar donde se realiza el evento
 	public $localizacion;
@@ -51,7 +52,7 @@ class Viaje {
 
 
 	public function init($_id, $_orden, $_tipo, 
-		$_agenciaDeDespedidas, $_viajesturismoactivo, $_novioViajes, 
+		$_agenciaDeDespedidas, $_viajesturismoactivo, $_novioViajes, $_megaOferta,
 		$_localizacion, $_descripcion, $_imagenes = null, 
 		$_actividades = null, $_precio, $_notas = null, 
 		$_adjuntos = null, $_titulo)
@@ -62,6 +63,7 @@ class Viaje {
 		$this->dds = $_agenciaDeDespedidas;
 		$this->vta = $_viajesturismoactivo;
 		$this->vdn = $_novioViajes;
+		$this->mgo = $_megaOferta;
 		$this->localizacion = $_localizacion;
 		$this->descripcion = $_descripcion;
 		$this->precio = $_precio;
@@ -82,6 +84,10 @@ class Viaje {
 
 	public function agenciaDeDespedidas(){
 		return $this->dds;
+	}
+
+	public function megaOferta(){
+		return $this->mgo;
 	}
 
 	/**

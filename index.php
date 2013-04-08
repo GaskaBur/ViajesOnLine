@@ -36,8 +36,21 @@ $viajes -> loadViajes(); //Este método ahora carga viajes normales y ofertas.
 
 //Analizando URL -> Parámetros _GET id|category
 
+#Llega por URL la petición de la MegaOferta
+if (isset($_GET['megaoferta'])){
+	$oferta = $viajes->getMegaOferta();
+	if (isset($_GET['widget']))
+		echo $twig->render('megaofertawidget.html', array(
+				'oferta' => $oferta,
+		));
+	else
+		echo $twig->render('megaoferta.html', array(
+				'oferta' => $oferta,
+		));
+	
+}
 #Llega por URL id del viaje (id) y categoría (category)
-if (isset($_GET['id']) && isset($_GET['category'])) {
+elseif (isset($_GET['id']) && isset($_GET['category'])) {
 	getterID($viajes->getViaje($_GET['id'],$_GET['category']),$twig);
 }
 

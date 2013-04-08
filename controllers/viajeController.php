@@ -25,7 +25,7 @@ class ControllerViajes {
 	*/
 	public function loadViajes(){
 		
-		$xml = new XmlSimpleParser('http://www.grupotiempoactivo.com/feed-datos.php');
+		$xml = new XmlSimpleParser('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
 		//$xml = new XmlSimpleParser('http://192.168.1.130/viajes-online.net/admcms/wp-content/themes/wp-foundation/XML-parser/XML-tipo/xmlWeb.xml','viaje');
 
 		#Cargando datos de los viajes -------------------------------------------------------------------------------------------
@@ -62,7 +62,8 @@ class ControllerViajes {
 		{
 			//Carga los viajes en ofertas
 			foreach ($this->viajesOferta as $v) {		
-				$travels[] =  $v ;
+				if ($v->mgo != 1)
+					$travels[] =  $v ;
 			}
 			
 		}
@@ -80,6 +81,22 @@ class ControllerViajes {
 		
 		return $travels;
 	}
+
+	/**
+	Busca y devuelve la mega oferta
+	*/
+	public function getMegaOferta() {
+		$megaOferta = null;
+		//Carga los viajes en ofertas
+		foreach ($this->viajesOferta as $v) {		
+			if ($v->mgo == 1)
+				$megaOferta = $v; 
+		}
+		return $megaOferta;
+
+	}
+
+
 
 	public function getViaje($id, $cat = null)
 	{
@@ -144,6 +161,7 @@ class ControllerViajes {
 		
 		foreach ($parseado as $item) {
 			
+			
 			$imagenes = array();
 			$actividades = array();
 			$notas = array();
@@ -169,7 +187,6 @@ class ControllerViajes {
 
 			foreach ($item->adjunto as $adjunto)
 				$adjuntos[] = $adjunto;
-
 			$viaje = new Viaje();
 			$viaje->init(
 				$item->id,
@@ -178,6 +195,7 @@ class ControllerViajes {
 				$item->agenciadedespedidas,
 				$item->viajesturismoactivo,
 				$item->novioviajes,
+				$item->megaoferta,
 				$item->localizacion,
 				$item->descripcion,
 				$imagenes,

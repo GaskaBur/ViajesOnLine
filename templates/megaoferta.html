@@ -1,0 +1,29 @@
+<h1 class="single-title" itemprop="headline">{{oferta.titulo}}</h1>
+
+<header>
+	<div class="vo-oferta-foto"><img src="{{oferta.imagenes[0].url}}"  alt="{{oferta.titulo}}" /></div>
+	<!-- h5 class="nine column plazo">¡¡ Sólo hasta el 15/04/2013 !!</h5 -->                       
+	<div class="precio three column"><span>{{oferta.precio}}</span></div>							
+</header> <!-- end article header -->
+
+<div class="clear"></div> 
+<section class="post_content clearfix">
+	{% autoescape false %} {{oferta.descripcion}}{% endautoescape %}
+	{% set tieneFicherosAdjuntos = 0 %}
+	{% for adjunto in oferta.adjuntos %}
+		{% if adjunto != "" %}
+			{% set tieneFicherosAdjuntos = 1 %}
+		{% endif %}				
+	{% endfor %}
+	{% if tieneFicherosAdjuntos == 1 %}
+    <section class="adjuntos three columns">
+	<h5>Descarga + info</h5>
+		{% for adjunto in oferta.adjuntos %}
+        	{% if adjunto == "" %}                	
+			{% else%}
+			<a href="{{adjunto}}" rel="nofollow" class="doc" target="_blank" title="Descarga la información de la oferta">Descarga la información de la oferta</a>
+            {% endif %}
+		{% endfor %}
+	</section>
+    {% endif %}
+</section> <!-- end article section -->
