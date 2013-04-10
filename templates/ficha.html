@@ -6,6 +6,16 @@
 <title>{{v.titulo}} | {{cat}} |Viajes-Online.net</title>
 <meta name="description" content="{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)|slice(0,160)}}{% endautoescape %}"/>
 
+<!-- Open Graph tags para FB y G+ -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{v.titulo}} | {{cat}} | ">
+<meta property="og:url" content="http://viajes-online.net/?vid={{v.id}}&category={{cat}}">
+<meta property="og:description" content="{% autoescape false %}{{v.cuantasPalabras(v.descripcion,25)|slice(0,160)}}{% endautoescape %}">
+{% for img in v.imagenes%}
+<meta property="og:image" content="{{img.url}}" />
+{% endfor %}
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Viajes-Online.net | Tu agencia de viajes online">
 
 {% else %}
 
@@ -91,7 +101,25 @@
 			{% endfor %}
 		</section>
         {% endif %}
-       		
+       
+    <div class="botones-sociales" >
+        <div class="ico facebook">
+            <a href="http://www.facebook.com/share.php?u=http://viajes-online.net/packs-para-despedidas-de-soltero/?vid={{v.id}}%26category={{originalCat}}" title="Compartir en Facebook" target="blank_">facebook</a>
+        </div>  
+<div class="ico twitter">
+<a href="http://twitter.com/home/?status='En viajes-online.net:  {{v.titulo}}: http://viajes-online.net/packs-para-despedidas-de-soltero/?vid={{v.id}}%26category={{originalCat}}'" target="blank_" title="Compartir en Twitter">twitter</a>
+</div>
+<div class="ico tuenti">
+<script type="text/javascript" src="http://widgets.tuenti.com/widgets.js"></script>
+<a href="http://www.tuenti.com/share" class="tuenti-share-button"
+                           icon-style="light"
+                           share-url="http://viajes-online.net/packs-para-despedidas-de-soltero/?vid={{v.id}}%26category={{originalCat}}"
+                           suggested-text="Mira: {{v.titulo}}">tuenti</a>
+</div>       
+        <div class="ico correoe">
+<a href="mailto:?subject=Mira: {{v.titulo}} &body={% autoescape false %} {{v.descripcion}}{% endautoescape %} <BR> Reserva en: http://viajes-online.net/packs-para-despedidas-de-soltero/?vid={{v.id}}%26category={{originalCat}}" title="Compartir por email">mail</a>
+</div>              
+</div><!-- botones-sociales -->   		
 	</article> 
 {% endif %}
 {% endblock %}

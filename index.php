@@ -30,6 +30,7 @@ require_once_dir( 'controllers' );	#Incluye todos los .php de la carpeta control
 include('lib/xmlSimpleParser.php'); 	#Esta librería permite parsear url
 include('lib/includeTwig.php');			#Uso de plantillas Twig
 
+
 //Cargando Viajes
 $viajes = new ControllerViajes();
 $viajes -> loadViajes(); //Este método ahora carga viajes normales y ofertas.
@@ -51,7 +52,7 @@ if (isset($_GET['megaoferta'])){
 }
 #Llega por URL id del viaje (id) y categoría (category)
 elseif (isset($_GET['id']) && isset($_GET['category'])) {
-	getterID($viajes->getViaje($_GET['id'],$_GET['category']),$twig);
+	getterID($viajes->getViaje($_GET['id'],$_GET['category']),$twig,$_GET['category']);
 }
 
 #Llega por URL categoria del viaje (category)
@@ -60,10 +61,13 @@ elseif (isset($_GET['category'])){
 	$viajes_cat = $viajes->GetViajesCategoria(
 			$_GET['category'],
 			isset($_GET['order']) ? $_GET['order'] : null,
-			isset($_GET['widget']) ? $_GET['widget'] : null
-
-			);
+			isset($_GET['widget']) ? $_GET['widget'] : null,
+			isset($_GET['localizacion']) ? $_GET['localizacion'] : null
+	);
 	
+	if ($_GET['category'] == 'nuestrasofertas')
+		$viajes -> loadViajes('http://www.grupotiempoactivo.com/feed-datos-ofertas.php');
+
 	if ($_GET['category'] == 'portada')
 	{
 		if(!isset($_GET['widget']))
@@ -109,7 +113,7 @@ else {
 /**
 Esta funcion es similar para conseguir la ficha del viaje para los getters ID e ID+CATEGORY
 */
-function getterID($v,$twig)
+function getterID($v,$twig,$category = null)
 {
 	if ($v == null)
 		echo $twig->render('index.html', array('name' => 'Fabien'));
@@ -118,7 +122,10 @@ function getterID($v,$twig)
 		$putHead = 0;
 		$c = $v->getCategoria();
 		isset($_GET['head']) ? $putHead = 1 : $putHead = 0;
-		echo $twig->render('ficha.html', array('v' => $v,'putHead' => $putHead,'cat' => $c));
+		echo $twig->render('ficha.html', array('v' => $v,
+				'putHead' => $putHead,
+				'cat' => $c,
+				'originalCat' => $category));
 	}
 }
 

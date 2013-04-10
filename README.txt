@@ -1,5 +1,13 @@
 Viajes On Line =============================
 
+10/04/2013 ===============================================================
+
+**IMPLEMENTACIÓN FILTRO DE BUSQUEDA POR LOCALIDAD:
+index.php?category=agenciadespedidas&localizacion=9 ó Burgos.
+
+**ACTUALIZACIÓN DEL TEMPORIZADOR
+**REVISION FICHA.HTML PARA REDES SOCIALES
+
 08/04/2013 ===============================================================
 IMPLEMENTACIÓN MEGA OFERTA:
 - Implementada la funcionalidad de mega oferta:

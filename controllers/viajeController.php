@@ -1,4 +1,7 @@
 <?php
+
+
+
 /**
 @Autor: Sergio Gil Pérez
 @Company: Noises Of Hill
@@ -23,16 +26,19 @@ class ControllerViajes {
 	$viajes -> todos los viajes categorizados en Despedidas de soltero, Turismo Activo y Viajes de novios
 	$viajesOferta -> contiene los viajes en oferta.
 	*/
-	public function loadViajes(){
+	public function loadViajes($url = null){
 		
-		$xml = new XmlSimpleParser('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
+		if ($url == null)
+			$xml = new XmlSimpleParser('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
+		else
+			$xml = new XmlSimpleParser($url);
 		//$xml = new XmlSimpleParser('http://192.168.1.130/viajes-online.net/admcms/wp-content/themes/wp-foundation/XML-parser/XML-tipo/xmlWeb.xml','viaje');
 
 		#Cargando datos de los viajes -------------------------------------------------------------------------------------------
 
 		#Iniciando Arrays
-		$this->viajes = array();
-		$this->viajesOferta = array();
+		$this->viajes = array(); // Guardo los viajes normales y los viajes de novios.
+		$this->viajesOferta = array(); // Guardo las ofertas!!!!!
 
 		#insertando los distintos viajes
 		$this->addViajes('viaje',$xml); //La etiqueta viaje engloba despedidas de solter y Turismo Activo <viaje>
@@ -44,10 +50,12 @@ class ControllerViajes {
 
 	/**
 	Obtiene los viajes de la categoría especificada
+	Ahora cuando carga los viajes en oferta excluye del array el viaje en megaoferta.
 	*/
-	public  function GetViajesCategoria($cat,$order = null,$widget = null){
+	public  function GetViajesCategoria($cat,$order = null,$widget = null, $localidad = null){
 
 		#obteniendo viajes ------------------------------------------------------------------------------
+		
 		$travels = array();
 		$t = 'tipo';
 		if ($cat != 'portada' && $cat != 'nuestrasofertas' && $cat != "") 
@@ -55,7 +63,15 @@ class ControllerViajes {
 			//Carga los viajes de la categoría que corresponda (No ofertas)
 			foreach ($this->viajes as $v) {		
 				if ($v->$cat() == 1) // <------ De esta forma se llama a un metodo de forma dinámica en PHP.
-					$travels[] =  $v ;
+				{
+					if ($localidad == null)
+						$travels[] =  $v ;
+					else
+					{						
+						if ($this->viajeInLocalidad($v,$localidad))
+							$travels[] = $v;							
+					}
+				}
 			}
 		}
 		else 
@@ -63,9 +79,16 @@ class ControllerViajes {
 			//Carga los viajes en ofertas
 			foreach ($this->viajesOferta as $v) {		
 				if ($v->mgo != 1)
-					$travels[] =  $v ;
-			}
-			
+				{
+					if ($localidad == null)
+						$travels[] =  $v ;
+					else
+					{
+						if ($this->viajeInLocalidad($v,$localidad))
+							$travels[] = $v;
+					}
+				}
+			}			
 		}
 
 		#ordenando viajes -------------------------------------------------------------------------------
@@ -81,21 +104,19 @@ class ControllerViajes {
 		
 		return $travels;
 	}
+   
 
 	/**
 	Busca y devuelve la mega oferta
 	*/
 	public function getMegaOferta() {
 		$megaOferta = null;
-		//Carga los viajes en ofertas
 		foreach ($this->viajesOferta as $v) {		
 			if ($v->mgo == 1)
 				$megaOferta = $v; 
 		}
 		return $megaOferta;
-
 	}
-
 
 
 	public function getViaje($id, $cat = null)
@@ -258,6 +279,29 @@ class ControllerViajes {
         } while ($incremento > 1);
         
         return $v;
+	}
+
+	private function viajeInLocalidad($v,$localidad)
+	{
+		include('classes/localidades.php');		#Array de localidades
+		$loc = null;
+		if ((int)$localidad > 0)
+			$loc = (int)$localidad;
+		else
+		{
+			for ($i = 0; $i < count($localidades); $i++)
+			{
+				if (strtoupper($localidad) == strtoupper($localidades[$i]))
+				{
+					$loc = $i;
+					break;
+				}
+			}
+		}
+		if ($loc == $v->localizacion && $loc != null)
+			return true;
+		else
+			return false;
 	}
 
 }
