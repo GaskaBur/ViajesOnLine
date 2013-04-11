@@ -8,7 +8,7 @@
 #Contenido de un Viaje dentro de la aplicación
 */
 
-class Viaje {
+class Viaje {	
 
 	#int - Id única de cada viaje
 	public $id; 
@@ -31,6 +31,9 @@ class Viaje {
 
 	#String - Localización -> lugar donde se realiza el evento
 	public $localizacion;
+
+	#String - LocalizacionString -> traducción del código de localización.
+	public $localizacionString;
 
 	#String - Descripción -> Descripción el HTML del viaje
 	public $descripcion;
@@ -57,6 +60,7 @@ class Viaje {
 		$_actividades = null, $_precio, $_notas = null, 
 		$_adjuntos = null, $_titulo)
 	{
+		include('classes/localidades.php');		#Array de localidades
 		$this->id = $_id;
 		$this->orden = $_orden;
 		$this->tipo = $_tipo;
@@ -65,6 +69,7 @@ class Viaje {
 		$this->vdn = $_novioViajes;
 		$this->mgo = $_megaOferta;
 		$this->localizacion = $_localizacion;
+		$this->localizacionString = $localidades[(int)$this->localizacion];
 		$this->descripcion = $_descripcion;
 		$this->precio = $_precio;
 		$this->imagenes = $_imagenes;
