@@ -29,7 +29,7 @@ class ControllerViajes {
 	public function loadViajes($url = null){
 		
 		if ($url == null)
-			$xml = new XmlSimpleParser('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
+			$xml = new XmlSimpleParser('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLineOfertas.xml');
 		else
 			$xml = new XmlSimpleParser($url);
 		//$xml = new XmlSimpleParser('http://192.168.1.130/viajes-online.net/admcms/wp-content/themes/wp-foundation/XML-parser/XML-tipo/xmlWeb.xml','viaje');

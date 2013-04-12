@@ -1,5 +1,17 @@
 Viajes On Line =============================
 
+12/04/2013 Entendiendo Viajes OnLine
+==============================================
+Despues de una charla con Caín por fin se entiende viajes on-Line y se realizan los siguientes cambios:
+
+- Ahora siempre se lee el feed de ofertas a no ser que queramos filtrar la busqueda por localización, entonces se lee el feed con todos los viajes.
+- En las plantillas se añade una varible twig que se llama server, es un array con el contenido del array $_SERVER de PHP y su utilización es homóloga.
+Ejemplo:
+en PHP -> $_SERVER[SERVER_NAME'];
+en twig -> {{server['SERVER_NAME']}}
+
+Nota: QUEDA PENDIENTE EN ESTE COMMIT REVISAR VUESTRA INTEGRACIÓN CON VUESTRAS PLANTILLAS.
+
 10/04/2013 ===============================================================
 
 **IMPLEMENTACIÓN FILTRO DE BUSQUEDA POR LOCALIDAD:

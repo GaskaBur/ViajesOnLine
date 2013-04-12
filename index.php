@@ -30,6 +30,7 @@ require_once_dir( 'controllers' );	#Incluye todos los .php de la carpeta control
 include('lib/xmlSimpleParser.php'); 	#Esta librería permite parsear url
 include('lib/includeTwig.php');			#Uso de plantillas Twig
 
+$twig->addGlobal('server',$_SERVER);
 
 //Cargando Viajes
 $viajes = new ControllerViajes();
@@ -58,6 +59,10 @@ elseif (isset($_GET['id']) && isset($_GET['category'])) {
 #Llega por URL categoria del viaje (category)
 elseif (isset($_GET['category'])){
 
+	if (isset($_GET['localizacion']))
+		$viajes -> loadViajes('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
+
+
 	$viajes_cat = $viajes->GetViajesCategoria(
 			$_GET['category'],
 			isset($_GET['order']) ? $_GET['order'] : null,
@@ -65,8 +70,6 @@ elseif (isset($_GET['category'])){
 			isset($_GET['localizacion']) ? $_GET['localizacion'] : null
 	);
 	
-	if ($_GET['category'] == 'nuestrasofertas')
-		$viajes -> loadViajes('http://www.grupotiempoactivo.com/feed-datos-ofertas.php');
 
 	if ($_GET['category'] == 'portada')
 	{
