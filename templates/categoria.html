@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if viajes|length == 0 %}
-<p>no existen viajes</p>
+<p>No existen viajes</p>
 {% else %}	
 <ul class="feed-list">
 	{% for v in viajes %}
@@ -11,7 +11,7 @@
         <li class="feed-list-item">
             <h5><a href="?vid={{v.id}}&category={{cat}}" title="{{v.titulo}}" rel="follow">{{v.titulo}}</a></h5>
             {% for img in v.imagenes%}
-                <div class="vo-oferta-foto"><a href="?vid={{v.id}}&category={{cat}}"  title="{{v.titulo}}" rel="follow"><img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}"></a></div>
+                <div class="vo-oferta-foto"><a href="?vid={{v.id}}&category={{cat}}&localizacion={{v.localizacion}}"  title="{{v.titulo}}" rel="follow"><img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}"></a></div>
             {% endfor %}
        
             <div class="precio">{{v.precio}}</div> 

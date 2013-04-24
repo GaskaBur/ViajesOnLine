@@ -1,7 +1,4 @@
 <?php
-
-
-
 /**
 @Autor: Sergio Gil Pérez
 @Company: Noises Of Hill

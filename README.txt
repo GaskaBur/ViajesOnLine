@@ -1,5 +1,8 @@
 Viajes On Line =============================
 
+24/04/2013 Última versión operativa
+=============================================
+
 12/04/2013 Entendiendo Viajes OnLine
 ==============================================
 Despues de una charla con Caín por fin se entiende viajes on-Line y se realizan los siguientes cambios:

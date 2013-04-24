@@ -10,12 +10,14 @@
 #Power by nicolaspar 2007  // Esta funcion sirve s los archvios de una carpeta.
 Esta función incluye todos los archivos .php de la carpeta especificada en $path
 */
+
 function require_once_dir( $path ){
     $dir = dir($path);
     while( ( $file = $dir->read() ) !== false )
         if( is_file( $path .'/'. $file ) and preg_match( '/^(.+)\.php$/i' , $file ) )
             require_once( $path .'/'. $file );
     $dir->close();
+	
 }
 
 //CLASES Y UTILS - Incluyo clases y utils que utilizaré en la aplicación ---------------------------------------------------		
@@ -30,12 +32,15 @@ require_once_dir( 'controllers' );	#Incluye todos los .php de la carpeta control
 include('lib/xmlSimpleParser.php'); 	#Esta librería permite parsear url
 include('lib/includeTwig.php');			#Uso de plantillas Twig
 
-$twig->addGlobal('server',$_SERVER);
-
 //Cargando Viajes
 $viajes = new ControllerViajes();
 $viajes -> loadViajes(); //Este método ahora carga viajes normales y ofertas.
 
+
+	if (isset ($_GET['localizacion'] ) && $_GET['localizacion'] != 0)
+		$viajes -> loadViajes('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
+		//  http://www.grupotiempoactivo.com/feed-datos.php
+		
 //Analizando URL -> Parámetros _GET id|category
 
 #Llega por URL la petición de la MegaOferta
@@ -59,10 +64,6 @@ elseif (isset($_GET['id']) && isset($_GET['category'])) {
 #Llega por URL categoria del viaje (category)
 elseif (isset($_GET['category'])){
 
-	if (isset($_GET['localizacion']))
-		$viajes -> loadViajes('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
-
-
 	$viajes_cat = $viajes->GetViajesCategoria(
 			$_GET['category'],
 			isset($_GET['order']) ? $_GET['order'] : null,
@@ -70,6 +71,10 @@ elseif (isset($_GET['category'])){
 			isset($_GET['localizacion']) ? $_GET['localizacion'] : null
 	);
 	
+	if ($_GET['category'] == 'nuestrasofertas')
+		$viajes -> loadViajes('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLineOfertas.xml');
+		//  http://www.grupotiempoactivo.com/feed-datos-ofertas.php
+
 
 	if ($_GET['category'] == 'portada')
 	{
@@ -77,6 +82,7 @@ elseif (isset($_GET['category'])){
 			echo $twig->render('portada.html', array(
 				'viajes' => $viajes_cat,
 				'cat' => $_GET['category'],
+				
 			));
 		else
 			echo $twig->render('widget.html', array(
@@ -91,6 +97,7 @@ elseif (isset($_GET['category'])){
 			echo $twig->render('categoria.html', array(
 				'viajes' => $viajes_cat,
 				'cat' => $_GET['category'],
+				
 			));
 		else
 			echo $twig->render('widget.html', array(
@@ -131,13 +138,4 @@ function getterID($v,$twig,$category = null)
 				'originalCat' => $category));
 	}
 }
-
-
-
-
-
-
-	
-
-
 

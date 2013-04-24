@@ -17,7 +17,8 @@
 {% for i in range(0, 2) %}
     <!-- {{i}} --> 
     
-    <div class="slidehome twelve column">
+    <div class="slidehome twelve columns">
+    
         <div class="orbit-foto">
         	<a href="nuestras-ofertas/?vid={{viajes[i].id}}" title="{{viajes[i].titulo}}" rel="follow"><img src="{{viajes[i].imagenes[0].url}}" alt="{{viajes[i].imagenes[0].alt}}" ></a>
             <div class="precio"><span>{{viajes[i].precio}}</span></div>
@@ -28,7 +29,10 @@
             
             <p>{% autoescape false %} {{viajes[i].cuantasPalabras(viajes[i].descripcion,20)}}{% endautoescape %} ...</p>
             
-            <a href="nuestras-ofertas/?vid={{viajes[i].id}}" class="leermas" title="Ver la oferta de viaje completa" rel="follow">Leer más »</a></div> 
+            <a href="nuestras-ofertas/?vid={{viajes[i].id}}" class="leermas" title="Ver la oferta de viaje completa" rel="follow">Reserva YA »</a>
+            
+        </div>
+        
     	</div>
     
 {% endfor %}

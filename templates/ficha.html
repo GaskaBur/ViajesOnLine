@@ -3,13 +3,14 @@
 {% block content %}
 {% if putHead == 1 %}
 
-<title>{{v.titulo}} | {{cat}} |Viajes-Online.net</title>
+<title>{{v.titulo}} | {{cat}} {{v.localizacionString}} | Viajes-Online.net</title>
+<meta name="title" content="{{v.titulo}} | {{cat}} {{v.localizacionString}} | Viajes-Online.net"/>
 <meta name="description" content="{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)|slice(0,160)}}{% endautoescape %}"/>
 
 <!-- Open Graph tags para FB y G+ -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="{{v.titulo}} | {{cat}} | ">
-<meta property="og:url" content="http://viajes-online.net/?vid={{v.id}}&category={{cat}}">
+<meta property="og:url" content="">
 <meta property="og:description" content="{% autoescape false %}{{v.cuantasPalabras(v.descripcion,25)|slice(0,160)}}{% endautoescape %}">
 {% for img in v.imagenes%}
 <meta property="og:image" content="{{img.url}}" />
@@ -81,14 +82,35 @@
        </section>
        {% endif %}
        
-        {% if tieneNotas == 1 %}
-		<section class="notas three columns">        
-		<h5>Info extra</h5>
-			{% for nota in v.notas %}
-				<p>{{nota}}</p>
-			{% endfor %}      
-        </section>
+       
+		<section class="notas three columns">
+        {% if v.actividades|length > 0 %}
+        	<h4 class="lugar">Lugar: <strong>{{v.localizacionString}}</strong></h4>
         {% endif %}
+         	{% if tieneNotas == 1 %}
+            <h5>Info extra</h5>
+                {% for nota in v.notas %}
+                    <p>{{nota}}</p>
+                {% endfor %} 
+            {% endif %} 
+            <!--<div class="botones-sociales" >            
+                <h6>¡Compártelo!</h6>
+                    <div class="ico facebook">
+                        <a href="http://www.facebook.com/share.php?u=&t={{v.titulo}}" title="Compartir en Facebook" target="blank_"><img src="http://viajes-online.net/admcms/wp-content/themes/wp-foundation/images/comparte_fb.jpg"></a>
+                    </div>  
+                    <div class="ico twitter">
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{app.current_url}}" data-text="{{v.titulo}} : " data-via="Viajesonline1" data-lang="es" data-size="medium">Twittear</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </div>
+                    <div class="ico tuenti">
+                        <script type="text/javascript" src="http://widgets.tuenti.com/widgets.js"></script><a href="http://www.tuenti.com/share" class="tuenti-share-button" icon-style="light" share-url="{{app.current_url}}" suggested-text="Mira: {{v.titulo}}">Compartir en tuenti</a>
+                    </div>       
+                    <div class="ico correoe">
+                        <a href="mailto:?subject=¡Mira! :D » {{v.titulo}} &body={% autoescape false %} {{v.descripcion}}{% endautoescape %} <BR/> Reserva en: {{app.current_url}}" title="Compartir por email"><img src="http://viajes-online.net/admcms/wp-content/themes/wp-foundation/images/comprate_mail.png"></a>
+                    </div>              
+            </div><!-- botones-sociales -->
+        </section>
+        
         
         {% if tieneFicherosAdjuntos == 1 %}
         <section class="adjuntos three columns">
@@ -102,24 +124,7 @@
 		</section>
         {% endif %}
        
-    <div class="botones-sociales" >
-        <div class="ico facebook">
-            <a href="http://www.facebook.com/share.php?u=http://viajes-online.net/packs-para-despedidas-de-soltero/?vid={{v.id}}%26category={{originalCat}}" title="Compartir en Facebook" target="blank_">facebook</a>
-        </div>  
-<div class="ico twitter">
-<a href="http://twitter.com/home/?status='En viajes-online.net:  {{v.titulo}}: http://viajes-online.net/packs-para-despedidas-de-soltero/?vid={{v.id}}%26category={{originalCat}}'" target="blank_" title="Compartir en Twitter">twitter</a>
-</div>
-<div class="ico tuenti">
-<script type="text/javascript" src="http://widgets.tuenti.com/widgets.js"></script>
-<a href="http://www.tuenti.com/share" class="tuenti-share-button"
-                           icon-style="light"
-                           share-url="http://viajes-online.net/packs-para-despedidas-de-soltero/?vid={{v.id}}%26category={{originalCat}}"
-                           suggested-text="Mira: {{v.titulo}}">tuenti</a>
-</div>       
-        <div class="ico correoe">
-<a href="mailto:?subject=Mira: {{v.titulo}} &body={% autoescape false %} {{v.descripcion}}{% endautoescape %} <BR> Reserva en: http://viajes-online.net/packs-para-despedidas-de-soltero/?vid={{v.id}}%26category={{originalCat}}" title="Compartir por email">mail</a>
-</div>              
-</div><!-- botones-sociales -->   		
+    
 	</article> 
 {% endif %}
 {% endblock %}
