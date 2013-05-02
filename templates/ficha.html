@@ -10,7 +10,7 @@
 <!-- Open Graph tags para FB y G+ -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="{{v.titulo}} | {{cat}} {{v.localizacionString}} | Viajes-Online.net">
-<meta property="og:url" content="">
+<meta property="og:url" content="{{server['HTTP_HOST']}}{{server['REQUEST_URI']}}">
 <meta property="og:description" content="{% autoescape false %}{{v.cuantasPalabras(v.descripcion,25)|slice(0,160)}}{% endautoescape %}">
 {% for img in v.imagenes%}
 <meta property="og:image" content="{{img.url}}" />
