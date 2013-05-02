@@ -32,6 +32,9 @@ require_once_dir( 'controllers' );	#Incluye todos los .php de la carpeta control
 include('lib/xmlSimpleParser.php'); 	#Esta librería permite parsear url
 include('lib/includeTwig.php');			#Uso de plantillas Twig
 
+
+$twig->addGlobal('server',$_SERVER); 
+
 //Cargando Viajes
 $viajes = new ControllerViajes();
 $viajes -> loadViajes(); //Este método ahora carga viajes normales y ofertas.
