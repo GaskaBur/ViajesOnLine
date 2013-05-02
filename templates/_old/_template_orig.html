@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+  <title> {%block title%} Viajes on Line {% endblock %}</title>        
+	<meta name="description" content="{%block description%}{% endblock %}"/>
+  <meta name="keywords" content="{%block key%}{% endblock %}" />
+  <meta content="width=device-width" name="viewport">
+	
+  {% block cssBlock%}
+    {% for css in headCSS %}                
+      <link href="{{ app.request.basepath }}/css/{{css.archivo}}" rel="stylesheet" type="text/css" />
+    {% endfor %}
+  {% endblock%}
+
+  {% block jsBlock %}   
+           
+    	 <!--[if lt IE 9]>
+         <script type="text/javascript">
+            document.createElement("nav");
+            document.createElement("header");
+            document.createElement("footer");
+            document.createElement("section");
+            document.createElement("article");
+            document.createElement("aside");
+            document.createElement("hgroup");
+          </script>
+        <![endif]--> 
+            
+            
+            
+    <!-- Google Analitycs-->
+		<script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+      _gaq.push(['_trackPageview']);    
+      (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  {% endblock%}
+</head>
+    <body> 
+        {% block header %}
+          {% include 'header.html' %}
+        {% endblock %}
+
+        {% block content %}
+        
+            
+        {% endblock %}
+
+        {% block footer %}
+        <h1>Esto sería el footer</h1>
+        {% endblock %}
+       
+    </body>
+</html>

@@ -7,7 +7,7 @@
 */
 
 /**
-#Power by nicolaspar 2007  // Esta funcion sirve s los archvios de una carpeta.
+#Power by nicolaspar 2007  // Esta funcion sirve los archivos de una carpeta.
 Esta función incluye todos los archivos .php de la carpeta especificada en $path
 */
 

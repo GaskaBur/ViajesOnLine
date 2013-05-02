@@ -1,0 +1,54 @@
+{% extends 'template.html' %}
+
+{% block header %}
+<h1>en ficha de producto añado esto, pero ademas voy a poner el header que estaba en la siguiente linea</h1>
+{{ parent() }}
+{% endblock %}
+{% block content %}
+<p>ficha del viaje</p>
+<ul>
+		<li>Id del viaje: {{v.id}}</li>
+		<li>tipo viaje: {{v.tipo}}</li>
+		<li>Despedida de Solteros: {{v.dds}}</li>
+		<li>Tutismo Activo: {{v.vta}}</li>
+		<li>Viajes de Novios: {{v.vdn}}</li>
+		<li>orden: {{v.orden}}</li>
+		<li>Localización: {{v.localizacion}}</li>
+		<li>Descripcion: {% autoescape false %}{{v.descripcion}}{% endautoescape %}</li>
+		<li>Imagenes:
+	        {% for img in v.imagenes%}
+	        	<img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}">
+	        {% endfor %}
+		</li>
+		<li>Actividades
+			<ul>
+			{% for act in v.actividades%}
+	        	<li>{{act.nombre}}</li>
+	        	<li>{% autoescape false %}{{act.descripcion}}{% endautoescape %}</li>
+	        	<li>
+	        		{% for img in act.imagenes%}
+	        			<img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}">
+	        		{% endfor %}	
+	        	</li>	
+	        {% endfor %}
+	    	</ul>
+		</li>
+		<li>{{v.precio}}</li>	
+		<li>
+			<p>Notas</p>
+			{% for nota in v.notas %}
+				{{nota}}
+			{% endfor %}
+		</li>
+
+		<li>
+			<p>Documentos adjntos</p>
+			{% for adjunto in v.adjuntos %}
+				<a href="{{adjunto}}" target="_blank">{{adjunto}}</a>
+			{% endfor %}
+		</li>
+		<li>
+			<a href="?category={{cat}}">Volver a listado</a>
+		</li>
+		</ul> 
+{% endblock %}

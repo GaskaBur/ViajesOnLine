@@ -9,7 +9,7 @@
 	{% for v in viajes %}
 		
         <li class="feed-list-item">
-            <h5><a href="?vid={{v.id}}&category={{cat}}" title="{{v.titulo}}" rel="follow">{{v.titulo}}</a></h5>
+            <h5><a href="?vid={{v.id}}&category={{cat}}&localizacion={{v.localizacion}}" title="{{v.titulo}}" rel="follow">{{v.titulo}}</a></h5>
             {% for img in v.imagenes%}
                 <div class="vo-oferta-foto"><a href="?vid={{v.id}}&category={{cat}}&localizacion={{v.localizacion}}"  title="{{v.titulo}}" rel="follow"><img src="{{img.url}}" alt="{{img.alt}}" title="{{img.title}}"></a></div>
             {% endfor %}
