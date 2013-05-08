@@ -21,7 +21,7 @@ function require_once_dir( $path ){
 }
 
 //CLASES Y UTILS - Incluyo clases y utils que utilizaré en la aplicación ---------------------------------------------------		
-
+require_once('classes/A_Model.php');
 require_once_dir( 'classes' ); 	#Incluye todos los .php de la carpeta classes (Clases necesarias propias de la app)
 require_once_dir( 'utils' );	#Incluye todos los .php de la carpeta utils -> utilidades varias (errores, logs, etc...)
 require_once_dir( 'controllers' );	#Incluye todos los .php de la carpeta controllers -> Controladores
@@ -32,19 +32,14 @@ require_once_dir( 'controllers' );	#Incluye todos los .php de la carpeta control
 include('lib/xmlSimpleParser.php'); 	#Esta librería permite parsear url
 include('lib/includeTwig.php');			#Uso de plantillas Twig
 
-//Cargando Viajes
-$viajes = new ControllerViajes();
-$viajes -> loadViajes(); //Este método ahora carga viajes normales y ofertas.
-
-
-	if (isset ($_GET['localizacion'] ) && $_GET['localizacion'] != 0)
-		$viajes -> loadViajes('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
-		//  http://www.grupotiempoactivo.com/feed-datos.php
-		
 //Analizando URL -> Parámetros _GET id|category
 
 #Llega por URL la petición de la MegaOferta
 if (isset($_GET['megaoferta'])){
+	
+	$viajes = new ControllerViajes();
+	$viajes->loadViajes();
+
 	$oferta = $viajes->getMegaOferta();
 	if (isset($_GET['widget']))
 		echo $twig->render('megaofertawidget.html', array(
@@ -58,59 +53,97 @@ if (isset($_GET['megaoferta'])){
 }
 #Llega por URL id del viaje (id) y categoría (category)
 elseif (isset($_GET['id']) && isset($_GET['category'])) {
-	getterID($viajes->getViaje($_GET['id'],$_GET['category']),$twig,$_GET['category']);
+	if ($_GET['category'] == 'agenciadedespedidas' ||
+		$_GET['category'] == 'viajesturimsoactivo' ||
+		$_GET['category'] == 'novioviajes' ||
+		$_GET['category'] == 'nuestrasofertas' )
+	{
+		$viajes = new ControllerViajes();
+		$viajes -> loadViajes();
+		getterID($viajes->getViaje($_GET['id'],$_GET['category']),$twig,$_GET['category']);
+	}
+	elseif ($_GET['category'] == 'actividades')
+	{
+		# Actividades
+	}
+	elseif ($_GET['category'] == 'alojamientos') {
+		# Alojamientos
+	}
+	elseif ($_GET['category'] == 'restaurantes') {
+		# Restaurantes
+		$restaurantes = new ControllerRestaurantes();
+	}
 }
 
 #Llega por URL categoria del viaje (category)
 elseif (isset($_GET['category'])){
 
-	$viajes_cat = $viajes->GetViajesCategoria(
-			$_GET['category'],
-			isset($_GET['order']) ? $_GET['order'] : null,
-			isset($_GET['widget']) ? $_GET['widget'] : null,
-			isset($_GET['localizacion']) ? $_GET['localizacion'] : null
-	);
-	
-	if ($_GET['category'] == 'nuestrasofertas')
-		$viajes -> loadViajes('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLineOfertas.xml');
-		//  http://www.grupotiempoactivo.com/feed-datos-ofertas.php
-
-
-	if ($_GET['category'] == 'portada')
-	{
-		if(!isset($_GET['widget']))
-			echo $twig->render('portada.html', array(
-				'viajes' => $viajes_cat,
-				'cat' => $_GET['category'],
-				
-			));
-		else
-			echo $twig->render('widget.html', array(
-				'viajes' => $viajes_cat,
-				'cat' => $_GET['category'],
-			));
-
+	if($_GET['category'] == 'actividades'){
+		# Actividades
+	}
+	elseif ($_GET['category'] == 'alojamientos') {
+		# Alojamientos
+	}
+	elseif ($_GET['category'] == 'restaurantes') {
+		# Restaurantes
 	}
 	else
 	{
-		if(!isset($_GET['widget']))
-			echo $twig->render('categoria.html', array(
-				'viajes' => $viajes_cat,
-				'cat' => $_GET['category'],
-				
-			));
-		else
-			echo $twig->render('widget.html', array(
-				'viajes' => $viajes_cat,
-				'cat' => $_GET['category'],
-			));
+		$viajes = new ControllerViajes();
+		$viajes -> loadViajes();
+		if (isset ($_GET['localizacion'] ) && $_GET['localizacion'] != 0)
+		$viajes -> loadViajes('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
+		//  http://www.grupotiempoactivo.com/feed-datos.php
+		$viajes_cat = $viajes->GetViajesCategoria(
+				$_GET['category'],
+				isset($_GET['order']) ? $_GET['order'] : null,
+				isset($_GET['widget']) ? $_GET['widget'] : null,
+				isset($_GET['localizacion']) ? $_GET['localizacion'] : null
+		);
+		
+		if ($_GET['category'] == 'nuestrasofertas')
+			$viajes -> loadViajes('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLineOfertas.xml');
+			//  http://www.grupotiempoactivo.com/feed-datos-ofertas.php
 
+
+		if ($_GET['category'] == 'portada')
+		{
+			if(!isset($_GET['widget']))
+				echo $twig->render('portada.html', array(
+					'viajes' => $viajes_cat,
+					'cat' => $_GET['category'],
+					
+				));
+			else
+				echo $twig->render('widget.html', array(
+					'viajes' => $viajes_cat,
+					'cat' => $_GET['category'],
+				));
+
+		}
+		else
+		{
+			if(!isset($_GET['widget']))
+				echo $twig->render('categoria.html', array(
+					'viajes' => $viajes_cat,
+					'cat' => $_GET['category'],
+					
+				));
+			else
+				echo $twig->render('widget.html', array(
+					'viajes' => $viajes_cat,
+					'cat' => $_GET['category'],
+				));
+
+		}
 	}
 
 }
 
 //Llega por URL el id del viaje (id)
 elseif (isset($_GET['id'])) {
+	$viajes = new ControllerViajes();
+	$viajes -> loadViajes();
 	getterID($viajes->getViaje($_GET['id']),$twig);
 	
 }
