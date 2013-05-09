@@ -59,7 +59,10 @@ elseif (isset($_GET['id']) && isset($_GET['category'])) {
 		$_GET['category'] == 'nuestrasofertas' )
 	{
 		$viajes = new ControllerViajes();
-		$viajes -> loadViajes();
+		if (isset ($_GET['localizacion'] ) && $_GET['localizacion'] != 0)
+			$viajes -> loadViajes('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
+		else
+			$viajes -> loadViajes();
 		getterID($viajes->getViaje($_GET['id'],$_GET['category']),$twig,$_GET['category']);
 	}
 	elseif ($_GET['category'] == 'actividades')
