@@ -48,6 +48,11 @@
             <p>{% autoescape false %} {{v.descripcion}}{% endautoescape %}</p>
         </div> <!-- end article section -->
 		
+        {% if v.grupoMinimo %}
+            <div>
+                <p>Grupo mínimo {{v.grupoMinimo}} personas</p>
+            <div>
+        {% endif%}
 		{% set tieneNotas = 0 %}
     	{% for nota in v.notas %}
 			{% if nota != "" %}

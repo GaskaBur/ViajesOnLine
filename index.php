@@ -21,7 +21,7 @@ function require_once_dir( $path ){
 }
 
 //CLASES Y UTILS - Incluyo clases y utils que utilizaré en la aplicación ---------------------------------------------------		
-require_once('classes/A_Model.php');
+require_once_dir( 'models' );
 require_once_dir( 'classes' ); 	#Incluye todos los .php de la carpeta classes (Clases necesarias propias de la app)
 require_once_dir( 'utils' );	#Incluye todos los .php de la carpeta utils -> utilidades varias (errores, logs, etc...)
 require_once_dir( 'controllers' );	#Incluye todos los .php de la carpeta controllers -> Controladores
@@ -65,13 +65,21 @@ elseif (isset($_GET['id']) && isset($_GET['category'])) {
 	elseif ($_GET['category'] == 'actividades')
 	{
 		# Actividades
+		$actividades = new ControllerAlojamientos();
+		$actividades ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/alojamientos.xml','alojamiento');
+		getterID($actividades->getItem($_GET['id']),$twig,$_GET['category']);
 	}
 	elseif ($_GET['category'] == 'alojamientos') {
 		# Alojamientos
+		$alojamientos = new ControllerActividades();
+		$alojamientos ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/actividades.xml','actividad');
+		getterID($alojamientos->getItem($_GET['id']),$twig,$_GET['category']);
 	}
 	elseif ($_GET['category'] == 'restaurantes') {
 		# Restaurantes
 		$restaurantes = new ControllerRestaurantes();
+		$restaurantes ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/restaurantes.xml','restaurante');
+		getterID($restaurantes->getItem($_GET['id']),$twig,$_GET['category']);
 	}
 }
 
@@ -80,12 +88,23 @@ elseif (isset($_GET['category'])){
 
 	if($_GET['category'] == 'actividades'){
 		# Actividades
+		$actividades = new ControllerAlojamientos();
+		$actividades ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/alojamientos.xml','alojamiento',isset($_GET['order']) ? $_GET['order'] : null);
+		showCategory($actividades->items,$twig);
 	}
 	elseif ($_GET['category'] == 'alojamientos') {
 		# Alojamientos
+		$alojamientos = new ControllerActividades();
+		$alojamientos ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/actividades.xml','actividad',isset($_GET['order']) ? $_GET['order'] : null);
+		showCategory($alojamientos->items,$twig);
 	}
 	elseif ($_GET['category'] == 'restaurantes') {
 		# Restaurantes
+		$restaurantes = new ControllerRestaurantes();
+		$restaurantes ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/restaurantes.xml','restaurante',isset($_GET['order']) ? $_GET['order'] : null);
+		showCategory($restaurantes->items,$twig);
+		
+
 	}
 	else
 	{
@@ -123,17 +142,8 @@ elseif (isset($_GET['category'])){
 		}
 		else
 		{
-			if(!isset($_GET['widget']))
-				echo $twig->render('categoria.html', array(
-					'viajes' => $viajes_cat,
-					'cat' => $_GET['category'],
-					
-				));
-			else
-				echo $twig->render('widget.html', array(
-					'viajes' => $viajes_cat,
-					'cat' => $_GET['category'],
-				));
+			
+
 
 		}
 	}
@@ -153,6 +163,20 @@ else {
 	echo $twig->render('index.html', array('name' => 'Fabien'));
 }
 
+function showCategory($items,$twig){
+	if(!isset($_GET['widget']))
+			echo $twig->render('categoria.html', array(
+				'viajes' => $items,
+				'cat' => $_GET['category'],
+				
+			));
+		else
+			echo $twig->render('widget.html', array(
+				'viajes' => $items,
+				'cat' => $_GET['category'],
+			));
+}
+
 /**
 Esta funcion es similar para conseguir la ficha del viaje para los getters ID e ID+CATEGORY
 */
@@ -163,7 +187,10 @@ function getterID($v,$twig,$category = null)
 	else
 	{
 		$putHead = 0;
-		$c = $v->getCategoria();
+		if ($category == 'alojamientos' || $category == 'Restaurantes' || $category == 'actividades')
+			$c = $category;
+		else
+			$c = $v->getCategoria();
 		isset($_GET['head']) ? $putHead = 1 : $putHead = 0;
 		echo $twig->render('ficha.html', array('v' => $v,
 				'putHead' => $putHead,

@@ -13,6 +13,12 @@ class Model {
 	#int - id_alojamiento
 	public $id;
 
+	#int - orden
+	public $orden;
+
+	#String - localizacion
+	public $localizacion;
+
 	#String - título
 	public $titulo;
 
@@ -20,25 +26,23 @@ class Model {
 	public $descripcion;
 
 	#String - tarifa
-	public $tafifa;
+	public $precio;
 
 	#Array Imagen[] - Imagenes
 	public $imagenes = array();
 
-	#String - Observaciones1
-	public $observaciones1;
+	#ing - Grupo mínimo
+	public $grupoMinimo;
 
-	#String - Observaciones2
-	public $observaciones2;
-
-	public function init($_id, $_titulo, $_descripcion, $_tarifa, $_imagenes = null, $_observaciones1 = null, $_observaciones2 = null){
+	public function init($_id,$_orden, $_localizacion, $_titulo, $_descripcion, $_precio, $_imagenes = null, $_grupoMinimo = null ){
 		$this->id = $_id;
+		$this->orden = $_orden;
+		$this->localizacion = $_localizacion;
 		$this->titulo = $_titulo;
 		$this->descripcion = $_descripcion;
-		$this->tarifa = $_tarifa;
+		$this->precio = $_precio;
 		$this->imagenes = $_imagenes;
-		$this->observaciones1 = $_observaciones1;
-		$this->observaciones2 = $_observaciones2;
+		$this->grupoMinimo = $_grupoMinimo;
 	} 
 }
 ?>

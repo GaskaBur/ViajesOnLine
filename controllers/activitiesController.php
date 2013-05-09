@@ -6,7 +6,6 @@
 
 #Controlador para los viajes
 */
-class ControllerRestaurantes extends Controller{
+class ControllerActividades extends Controller{
 
-	
 }
