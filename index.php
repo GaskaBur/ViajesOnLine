@@ -143,7 +143,17 @@ elseif (isset($_GET['category'])){
 		else
 		{
 			
+			if(!isset($_GET['widget']))
+				echo $twig->render('categoria.html', array(
+				'viajes' => $viajes_cat,
+				'cat' => $_GET['category'],
 
+				));
+			else
+				echo $twig->render('widget.html', array(
+				'viajes' => $viajes_cat,
+				'cat' => $_GET['category'],
+				));
 
 		}
 	}
