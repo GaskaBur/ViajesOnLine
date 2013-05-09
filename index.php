@@ -65,14 +65,14 @@ elseif (isset($_GET['id']) && isset($_GET['category'])) {
 	elseif ($_GET['category'] == 'actividades')
 	{
 		# Actividades
-		$actividades = new ControllerAlojamientos();
-		$actividades ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/alojamientos.xml','alojamiento');
+		$actividades = new ControllerActividades();
+		$actividades ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/actividades.xml','actividad');
 		getterID($actividades->getItem($_GET['id']),$twig,$_GET['category']);
 	}
 	elseif ($_GET['category'] == 'alojamientos') {
 		# Alojamientos
-		$alojamientos = new ControllerActividades();
-		$alojamientos ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/actividades.xml','actividad');
+		$alojamientos = new ControllerAlojamientos();
+		$alojamientos ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/alojamientos.xml','alojamiento');
 		getterID($alojamientos->getItem($_GET['id']),$twig,$_GET['category']);
 	}
 	elseif ($_GET['category'] == 'restaurantes') {
@@ -88,14 +88,14 @@ elseif (isset($_GET['category'])){
 
 	if($_GET['category'] == 'actividades'){
 		# Actividades
-		$actividades = new ControllerAlojamientos();
-		$actividades ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/alojamientos.xml','alojamiento',isset($_GET['order']) ? $_GET['order'] : null);
+		$actividades = new ControllerActividades();
+		$actividades ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/actividades.xml','actividad',isset($_GET['order']) ? $_GET['order'] : null);
 		showCategory($actividades->items,$twig);
 	}
 	elseif ($_GET['category'] == 'alojamientos') {
 		# Alojamientos
-		$alojamientos = new ControllerActividades();
-		$alojamientos ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/actividades.xml','actividad',isset($_GET['order']) ? $_GET['order'] : null);
+		$alojamientos = new ControllerAlojamientos();
+		$alojamientos ->loadItems('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/alojamientos.xml','alojamiento',isset($_GET['order']) ? $_GET['order'] : null);
 		showCategory($alojamientos->items,$twig);
 	}
 	elseif ($_GET['category'] == 'restaurantes') {
@@ -197,7 +197,7 @@ function getterID($v,$twig,$category = null)
 	else
 	{
 		$putHead = 0;
-		if ($category == 'alojamientos' || $category == 'Restaurantes' || $category == 'actividades')
+		if ($category == 'alojamientos' || $category == 'restaurantes' || $category == 'actividades')
 			$c = $category;
 		else
 			$c = $v->getCategoria();
