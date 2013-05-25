@@ -115,8 +115,8 @@ elseif (isset($_GET['category'])){
 	{
 		$viajes = new ControllerViajes();
 		$viajes -> loadViajes();
-		if (isset ($_GET['localizacion'] ) && $_GET['localizacion'] != 0)
-		$viajes -> loadViajes('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
+		if (isset ($_GET['localizacion'] ) && $_GET['localizacion'] != 0 && ($_GET['category'] == 'agenciadedespedidas' || $_GET['category'] == 'viajesturismoactivo'))
+			$viajes -> loadViajes('http://viajes-online.net/admcms/wp-content/themes/wp-foundation/temporizador/libs/viajesOnLine.xml');
 		//  http://www.grupotiempoactivo.com/feed-datos.php
 		$viajes_cat = $viajes->GetViajesCategoria(
 				$_GET['category'],
