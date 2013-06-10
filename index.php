@@ -56,6 +56,7 @@ elseif (isset($_GET['id']) && isset($_GET['category'])) {
 	if ($_GET['category'] == 'agenciadedespedidas' ||
 		$_GET['category'] == 'viajesturismoactivo' ||
 		$_GET['category'] == 'novioviajes' ||
+		$_GET['category'] == 'portada' ||
 		$_GET['category'] == 'nuestrasofertas' )
 	{
 		$viajes = new ControllerViajes();
@@ -65,6 +66,7 @@ elseif (isset($_GET['id']) && isset($_GET['category'])) {
 		}
 		else
 			$viajes -> loadViajes();
+		
 		getterID($viajes->getViaje($_GET['id'],$_GET['category']),$twig,$_GET['category']);
 	}
 	elseif ($_GET['category'] == 'actividades')
@@ -168,6 +170,7 @@ elseif (isset($_GET['category'])){
 //Llega por URL el id del viaje (id)
 elseif (isset($_GET['id'])) {
 	$viajes = new ControllerViajes();
+	echo "...";
 	$viajes -> loadViajes();
 	getterID($viajes->getViaje($_GET['id']),$twig);
 	

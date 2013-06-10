@@ -20,12 +20,12 @@
     <div class="slidehome twelve columns">
     
         <div class="orbit-foto">
-        	<a href="nuestras-ofertas/?vid={{viajes[i].id}}" title="{{viajes[i].titulo}}" rel="follow"><img src="{{viajes[i].imagenes[0].url}}" alt="{{viajes[i].imagenes[0].alt}}" ></a>
+        	<a href="nuestras-ofertas/?vid={{viajes[i].id}}&category=nuestrasofertas" title="{{viajes[i].titulo}}" rel="follow"><img src="{{viajes[i].imagenes[0].url}}" alt="{{viajes[i].imagenes[0].alt}}" ></a>
             <div class="precio"><span>{{viajes[i].precio}}</span></div>
         </div>
         <div class="orbit-texto" >
         
-            <h3><a href="nuestras-ofertas/?vid={{viajes[i].id}}" title="{{viajes[i].titulo}}" rel="follow">{{viajes[i].titulo}}</a></h3>
+            <h3><a href="nuestras-ofertas/?vid={{viajes[i].id}}&category=nuestrasofertas" title="{{viajes[i].titulo}}" rel="follow">{{viajes[i].titulo}}</a></h3>
             
             <p>{% autoescape false %} {{viajes[i].cuantasPalabras(viajes[i].descripcion,20)}}{% endautoescape %} ...</p>
             
@@ -54,9 +54,9 @@
     <!-- {{i}} -->               
     <li id="post-{{viajes[i].id}}" class="feed-list-item" >
         
-        <h5><a href="nuestras-ofertas/?vid={{viajes[i].id}}" rel="bookmark" title="{{viajes[i].titulo}}">{{viajes[i].titulo}}</a></h5>
+        <h5><a href="nuestras-ofertas/?vid={{viajes[i].id}}&category=nuestrasofertas" rel="bookmark" title="{{viajes[i].titulo}}">{{viajes[i].titulo}}</a></h5>
         <div class="vo-oferta-foto">
-            <a href="nuestras-ofertas/?vid={{viajes[i].id}}" title="{{viajes[i].titulo}}" ><img src="{{viajes[i].imagenes[0].url}}" class="" alt="{{viajes[i].imagenes[0].alt}}" /></a>
+            <a href="nuestras-ofertas/?vid={{viajes[i].id}}&category=nuestrasofertas" title="{{viajes[i].titulo}}" ><img src="{{viajes[i].imagenes[0].url}}" class="" alt="{{viajes[i].imagenes[0].alt}}" /></a>
         </div>                  
 
         <div class="precio">
