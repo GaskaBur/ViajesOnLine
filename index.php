@@ -32,6 +32,7 @@ require_once_dir( 'controllers' );	#Incluye todos los .php de la carpeta control
 include('lib/xmlSimpleParser.php'); 	#Esta librería permite parsear url
 include('lib/includeTwig.php');			#Uso de plantillas Twig
 
+
 //Analizando URL -> Parámetros _GET id|category
 
 #Llega por URL la petición de la MegaOferta
@@ -151,16 +152,26 @@ elseif (isset($_GET['category'])){
 		{
 			
 			if(!isset($_GET['widget']))
+			{
 				echo $twig->render('categoria.html', array(
 				'viajes' => $viajes_cat,
 				'cat' => $_GET['category'],
 
 				));
+			}
 			else
+			{
+				if (isset($_GET['localizacion']))
+					$loc = $_GET['localizacion'];
+				else
+					$loc = '0';
 				echo $twig->render('widget.html', array(
-				'viajes' => $viajes_cat,
-				'cat' => $_GET['category'],
+					'viajes' => $viajes_cat,
+					'cat' => $_GET['category'],
+					'loc' => $loc,
 				));
+			}
+			
 
 		}
 	}
@@ -189,9 +200,14 @@ function showCategory($items,$twig){
 				
 			));
 		else
+			if (isset($_GET['localizacion']))
+				$loc = $_GET['localizacion'];
+			else
+				$loc = 0;
 			echo $twig->render('widget.html', array(
 				'viajes' => $items,
 				'cat' => $_GET['category'],
+				'loc' => $loc,
 			));
 }
 

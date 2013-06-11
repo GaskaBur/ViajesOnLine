@@ -3,14 +3,20 @@
 {% block content %}
 {% if putHead == 1 %}
 
-<title>{{v.titulo}} | {{cat}} {{v.localizacionString}} | Viajes-Online.net</title>
-<meta name="title" content="{{v.titulo}} | {{cat}} {{v.localizacionString}} | Viajes-Online.net"/>
+<title>{{v.titulo}} | {{cat}} {% if v.localizacion > 0 %} en {{v.localizacionString}} {% endif %} | Viajes-Online.net</title>
+<meta name="title" content="{{v.titulo}} | {{cat}} {% if v.localizacion > 0 %} en {{v.localizacionString}} {% endif %} | Viajes-Online.net"/>
 <meta name="description" content="{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)|slice(0,160)}}{% endautoescape %}"/>
 
 <!-- Open Graph tags para FB y G+ -->
 <meta property="og:type" content="article">
 <meta property="og:title" content="{{v.titulo}} | {{cat}} {{v.localizacionString}} | Viajes-Online.net">
-<meta property="og:url" content="">
+{% if originalCat == 'nuestrasofertas'%}
+<meta property="og:url" content="http://viajes-online.net/nuestras-ofertas/?vid={{v.id}}&category={{originalCat}}">
+{% elseif originalCat == 'restaurantes' or originalCat == 'alojamientos' or originalCat == 'actividades' %}
+<meta property="og:url" content="http://despedidasburgos.com/?vid={{v.id}}&category={{originalCat}}">
+{% else %}
+<meta property="og:url" content="http://{{originalCat}}.es/?vid={{v.id}}&category={{originalCat}}&localizacion={{v.localizacion}}">
+{% endif %}
 <meta property="og:description" content="{% autoescape false %}{{v.cuantasPalabras(v.descripcion,25)|slice(0,160)}}{% endautoescape %}">
 {% for img in v.imagenes%}
 <meta property="og:image" content="{{img.url}}" />
@@ -39,20 +45,15 @@
             {% endfor %}            
            
             <div class="precio">
-                <span>{{v.precio}}</span>
+                <span>{{v.precio}} {% if cat == 'alojamientos' or  cat == 'restaurantes' or cat == 'actividades' %}€{% endif %}</span>
             </div>
         </header> <!-- end article header -->
                     
-         
-        <div class="post_content twelve columns" itemprop="articleBody">
-            <p>{% autoescape false %} {{v.descripcion}}{% endautoescape %}</p>
-        </div> <!-- end article section -->
+       <div class="nine columns contenidos">  
+        <section class="post_content twelve columns" itemprop="articleBody">
+           {% autoescape false %} {{v.descripcion}}{% endautoescape %}
+        </section> <!-- end article section -->
 		
-        {% if v.grupoMinimo %}
-            <div>
-                <p>Grupo mínimo {{v.grupoMinimo}} personas</p>
-            <div>
-        {% endif%}
 		{% set tieneNotas = 0 %}
     	{% for nota in v.notas %}
 			{% if nota != "" %}
@@ -69,7 +70,8 @@
 
        
         {% if v.actividades|length > 0 %}
-        <section class="actividades{% if tieneNotas == 1 or tieneFicherosAdjuntos == 1 %} bordedcha nine{%else%} twelve{% endif %} columns">
+       <!-- <section class="actividades{% if tieneNotas == 1 or tieneFicherosAdjuntos == 1 %} bordedcha nine{%else%} twelve{% endif %} columns"> « Controlamos si hay notas dividimos columnas. Descartado 01/ 05 / 2013***-->
+       <section class="actividades">
 		<h4>Actividades incluidas</h4>
 			<ol class="feed-item-activ">
 			{% for act in v.actividades %}
@@ -86,50 +88,58 @@
 	    	</ol>
        </section>
        {% endif %}
-       
+       </div> <!-- nine columns -->
        
 		<section class="notas three columns">
-        {% if v.actividades|length > 0 %}
-        	<h4 class="lugar">Lugar: <strong>{{v.localizacionString}}</strong></h4>
+		{% if v.grupoMinimo %}
+           <h5>Grupo mínimo {{v.grupoMinimo}} personas</h5>           
+        {% endif%} 
+        {% if v.localizacion > 0 %}
+        	<h4 class="lugar">En <strong>{{v.localizacionString}}</strong></h4>
+            <hr>
         {% endif %}
          	{% if tieneNotas == 1 %}
             <h5>Info extra</h5>
                 {% for nota in v.notas %}
                     <p>{{nota}}</p>
-                {% endfor %} 
-            {% endif %} 
-            <!--<div class="botones-sociales" >            
+                {% endfor %}
+             <hr> 
+            {% endif %}
+            {% if tieneFicherosAdjuntos == 1 %}
+            <div class="adjuntos">
+            <h5>Descarga + info</h5>
+                {% for adjunto in v.adjuntos %}
+                    {% if adjunto == "" %}                	
+                    {% else%}
+                    <a href="{{adjunto}}" rel="nofollow" class="doc" target="_blank" title="Descarga la información de la oferta">Descarga la información de la oferta</a>
+                    {% endif %}
+                {% endfor %}
+                <hr/>
+            </div>
+            
+            {% endif %}
+            <div class="boton-reservar"> 
+            <a href="#" id="buttonForModal" data-reveal-id="modalContenido" data-animation="fade" data-animationSpeed="400" class="radius button" title="Reserva Online YA!">Reservar Online</a>
+            </div>
+            <hr/>
+            <div class="botones-sociales" >            
                 <h6>¡Compártelo!</h6>
                     <div class="ico facebook">
-                        <a href="http://www.facebook.com/share.php?u=&t={{v.titulo}}" title="Compartir en Facebook" target="blank_"><img src="http://viajes-online.net/admcms/wp-content/themes/wp-foundation/images/comparte_fb.jpg"></a>
+                        <a href="http://www.facebook.com/share.php?u={{app.current_url}}&t={{cat}}{% if v.localizacion > 0 %} en {{v.localizacionString}}{% endif %}: {{v.titulo}}" title="Compartir en Facebook" target="blank_"><img src="http://viajes-online.net/admcms/wp-content/themes/wp-foundation/images/comparte_fb.jpg"></a>
                     </div>  
                     <div class="ico twitter">
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{app.current_url}}" data-text="{{v.titulo}} : " data-via="Viajesonline1" data-lang="es" data-size="medium">Twittear</a>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{app.current_url}}" data-text="{{cat}}{% if v.localizacion > 0 %} en {{v.localizacionString}}{% endif %}:
+                        {{v.titulo}}" data-via="Viajesonline1" data-lang="es" data-size="medium">Twittear</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                     </div>
                     <div class="ico tuenti">
-                        <script type="text/javascript" src="http://widgets.tuenti.com/widgets.js"></script><a href="http://www.tuenti.com/share" class="tuenti-share-button" icon-style="light" share-url="{{app.current_url}}" suggested-text="Mira: {{v.titulo}}">Compartir en tuenti</a>
+                        <script type="text/javascript" src="http://widgets.tuenti.com/widgets.js"></script><a href="http://www.tuenti.com/share" class="tuenti-share-button" icon-style="light" share-url="{{app.current_url}}" suggested-text="{{cat}}{% if v.localizacion > 0 %} en {{v.localizacionString}}{% endif %}: {{v.titulo}}">Compartir en tuenti</a>
                     </div>       
                     <div class="ico correoe">
-                        <a href="mailto:?subject=¡Mira! :D » {{v.titulo}} &body={% autoescape false %} {{v.descripcion}}{% endautoescape %} <BR/> Reserva en: {{app.current_url}}" title="Compartir por email"><img src="http://viajes-online.net/admcms/wp-content/themes/wp-foundation/images/comprate_mail.png"></a>
+                        <a href="mailto:?subject={{cat}}{% if v.localizacion > 0 %} en {{v.localizacionString}}{% endif %}: {{v.titulo}} &body= «{% autoescape false %} {{v.cuantasPalabras(v.descripcion,25)|slice(0,160)}}{% endautoescape %}...» ¿Qué te parece? Aquí lo ves al completo: {{app.current_url}}" title="Compartir por email"><img src="http://viajes-online.net/admcms/wp-content/themes/wp-foundation/images/comprate_mail.png"></a>
                     </div>              
             </div><!-- botones-sociales -->
         </section>
-        
-        
-        {% if tieneFicherosAdjuntos == 1 %}
-        <section class="adjuntos three columns">
-		<h5>Descarga + info</h5>
-			{% for adjunto in v.adjuntos %}
-            	{% if adjunto == "" %}                	
-				{% else%}
-				<a href="{{adjunto}}" rel="nofollow" class="doc" target="_blank" title="Descarga la información de la oferta">Descarga la información de la oferta</a>
-                {% endif %}
-			{% endfor %}
-		</section>
-        {% endif %}
-       
-    
 	</article> 
 {% endif %}
 {% endblock %}

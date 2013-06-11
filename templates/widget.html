@@ -8,8 +8,8 @@
 	{% for i in range(0, 2) %}
 	    <div class="widget">
 	    	<!-- WIDGET -->
-            <h5><a href="?vid={{viajes[i].id}}&category={{cat}}">{{viajes[i].titulo}}</a></h5>
-	        <div class="vo-oferta-foto"><a href="?vid={{viajes[i].id}}&category={{cat}}"><img src="{{viajes[i].imagenes[0].url}}" alt="{{viajes[i].imagenes[0].alt}}" ></a></div>
+            <h5><a href="?vid={{viajes[i].id}}&category={{cat}}&localizacion={{viajes[i].localizacion}}">{{viajes[i].titulo}}</a></h5>
+	        <div class="vo-oferta-foto"><a href="?vid={{viajes[i].id}}&category={{cat}}&localizacion={{viajes[i].localizacion}}"><img src="{{viajes[i].imagenes[0].url}}" alt="{{viajes[i].imagenes[0].alt}}" ></a></div>
 	        
 
 			<div class="precio"><span>{{viajes[i].precio}}</span></div>
